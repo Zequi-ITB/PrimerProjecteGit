@@ -16,6 +16,7 @@ fun main() {
     // Fem el càlcul final.
     var resultat : Double = preuSopar/comensals;
 
+    // Imprimim el resultat.
     println("El que ha de pagar cada començal es " + resultat+"€.")
 
     scan.close();
