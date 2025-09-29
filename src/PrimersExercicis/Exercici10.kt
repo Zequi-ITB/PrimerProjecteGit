@@ -6,7 +6,7 @@ fun main() {
     var scan : Scanner = Scanner(System.`in`);
     println("Escriu el valor del diàmetre de la pizza: ")
 
-   // Es calcula el diàmetre dividint-lo per 2.
+   // Es calcula l'area dividint-lo per 2.
     var diametre : Double = (scan.nextDouble())/2;
 
     // Es calcula la superificie amb la formula "PI*r elevat a 2".
