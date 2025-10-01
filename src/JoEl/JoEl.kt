@@ -1,25 +1,24 @@
-package JoEl
-
 import java.util.Scanner
 
+
+
 fun main() {
-    var scan : Scanner = Scanner(System.`in`);
 
-    //Demanem les dades
-    var metres : Double = scan.nextDouble();
-    var euros : Double = 0.0;
+    // Segona version millor comentada i amb variables mes definides.
 
-    // Fem les comprovacions amb un "When"
-    when(metres){
-        in 0.0..25.0 -> euros = 3.0;
-        in 25.1..75.0 -> euros = 4.0;
-        else -> euros = 5.0
+    var scan: Scanner = Scanner(System.`in`)
 
+// Demanem les dades
+    var segons : Int = scan.nextInt();
+    var dia : Int = (segons/(24*60*60))+1    // Dividim els segons per el total de segons que te un dia i le sumem 1, perque començem a comptar des-de 1.
+
+
+    //Fem la comprovacio per veure si es mati o nit.
+    if ((segons /43200)%2 != 0) {       // Dividim segons per 43200 que son els segons totals que te 12 hs i fem el modul de 2, si es parell vol dir que es nit en cas contrari, es mati.
+        println("nit del dia "+dia)
     }
-    // Fem el càlcul
-    var resultat : Double = euros*metres;
+    else
+        print("mati del dia "+dia);
 
-    // Imprimim el resultat.
-    println(""+metres +"m: "+resultat+" euros")
-
+    scan.close();
 }
