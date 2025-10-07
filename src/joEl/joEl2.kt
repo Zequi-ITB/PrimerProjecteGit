@@ -1,55 +1,49 @@
 package joEl
 
-//En un joc 2D el punt (0,0) és l’origen del món i les coordenades (x,y) de qualsevol objecte situat en aquest món
-// poden ser positives o negatives. Segons el signe de les coordenades l’objecte es troba en el quadrant 1, 2, 3 o 4.
-
-//Fes un programa que donades les coordenades x i y del centre d’un enemic i que digui a quin quadrant es troba.
-// ATENCIÓ: Si una de les coordenades val 0, llavors l’enemic es troba en DOS QUADRANTS.
-// Si les coordenades són 0,0, llavors es troba al centre. Cal indicar-ho correctament a l’usuari.
+// Et proposem un petit repte. Donat un número enter positiu N, suma per separat els números parells i els números senars entre 1 i N (inclós).
+//Es mostrarà un missatge indicant la suma dels nombres parells i la suma dels senars. El missatge tindrà el següent format: PARELLS: xxx SENARS: xxx
 
 import java.util.Scanner
 
 fun main() {
-    val SCAN = Scanner(System.`in`);
+    val scan = Scanner(System.`in`);
 
-    // Demanem les dades.
-    var coordenadaX = SCAN.nextInt();
-    var coordenadaY = SCAN.nextInt();
-    var quadrantsX: String = "";
-    var quadrantsY: String = "";
-    var quadrants: String = "";
+    // Demanem les voltes
 
-    //Fem les comparacions per saber en què quadrant es troba l'enemic.
-    if (coordenadaX == 0 && coordenadaY == 0) {
-        quadrants = "1,2,3,4"
-    } else if (coordenadaX == 0) {
-        quadrantsX = "1,2"
-    } else if (coordenadaX > 0) {
-        quadrantsX = "1"
-    } else if (coordenadaX < 0) {
-        quadrantsX = "2"
+    var voltes: Int = scan.nextInt();
+    var cont: Int = 0;
+    var sumaSenars: Int = 1;
+    var sumaParell: Int = 0;
+    var contParell: Int = 2;
+    var parellActual: Int = 0;
+
+
+    // Fem el bucle per sumar els parells i senars.
+    while (voltes < cont) {
+        var num: Int = scan.nextInt();
+        sumaParell = num;
+        parellActual = num;
+
+        cont++;
+        while (sumaParell <= num) {
+            parellActual = parellActual - 2;
+            sumaParell = sumaParell + (parellActual)
+            contParell = contParell + 2;
+
+        }
+        while (sumaSenars <= (num - 1)) {
+            sumaSenars + 2;
+        }
+
+
     }
-
-    if (coordenadaX == 0 && coordenadaY == 0) {
-        quadrants = "1,2,3,4"
-    } else if (coordenadaX == 0) {
-        quadrantsX = "1,2"
-    } else if (coordenadaX > 0) {
-        quadrantsX = "1"
-    } else if (coordenadaX < 0) {
-        quadrantsX = "2"
-    }
+    println("PARELLS: $sumaParell SENARS: $sumaSenars")
 
 
-    if (coordenadaX == 0) {
-        quadrantsX = "1,2"
-    } else if (coordenadaX > 0) {
-        quadrantsX = "1"
-    } else if (coordenadaX < 0) {
-        quadrantsX = "2"
-    }
-
-
-    // Imprimim el resultat.
+    scan.close();
 
 }
+
+// Imprimim el resultat.
+
+
