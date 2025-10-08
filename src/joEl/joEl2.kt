@@ -1,40 +1,35 @@
-package joEl
+// Jordi While() és un streamer famós. Com tots els streamers,
+// el que més por li fa es que l'hi posin 3 strikes a la compta, perquè aleshores li tancarien.
+//Per cada cas de prova caldrà respondre: Quants videos ha fet jordi fins a rebre el tercer strike (sense comptar els vídeos amb strike)
 
-// Et proposem un petit repte. Donat un número enter positiu N, suma per separat els números parells i els números senars entre 1 i N (inclós).
-//Es mostrarà un missatge indicant la suma dels nombres parells i la suma dels senars. El missatge tindrà el següent format: PARELLS: xxx SENARS: xxx
 
 import java.util.Scanner
 
 fun main() {
     val scan = Scanner(System.`in`);
 
-    // Demanem les voltes
+    // Fem el bucle do-while per que acabi al tercer strike.
+    var strike: Int = 0;
+    var videos: Int = 0;
 
-    var voltes: Int = scan.nextInt();
-    var sumaSenars: Int = 0;
-    var sumaParell: Int = 0;
-
-
-    // Fem el bucle per sumar els parells i senars.
-    repeat(voltes) {
+    do {
         var num: Int = scan.nextInt();
 
-        // Comprovem si és parell o senar.
-        for (i in 1..num) {
-            if (i % 2 == 0) {
-                sumaParell += i;
-            } else {
-                sumaSenars += i;
-            }
-
+        // Comprovem si es un strike o un video.
+        if (num == -1) {
+            strike++;
+        } else {
+            videos++;
         }
-        println("PARELLS: $sumaParell SENARS: $sumaSenars")
-    }
-    //Imprimim el resultat.
+    } while (strike != 3)
 
+    // Imprimim el resultat.
+    println(videos)
 
     scan.close();
-
 }
+
+
+
 
 
