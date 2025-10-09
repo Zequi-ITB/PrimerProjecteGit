@@ -1,31 +1,55 @@
 package joEl
-//La millor dècada és la dels 90. La gent que no hagi nascut als 90... pobres.
-// De fet, totes les dècades dels 90 són bones. 1890 va ser una bona decada i 2090 també ho serà.
 
-//Per cada cas de prova s'ha de dir SI si acaba amb nombres del 90 al 99 i NO en cas contrari.
+//En un joc 2D el punt (0,0) és l’origen del món i les coordenades (x,y) de qualsevol objecte situat en aquest món
+// poden ser positives o negatives. Segons el signe de les coordenades l’objecte es troba en el quadrant 1, 2, 3 o 4.
+
+//Fes un programa que donades les coordenades x i y del centre d’un enemic i que digui a quin quadrant es troba.
+// ATENCIÓ: Si una de les coordenades val 0, llavors l’enemic es troba en DOS QUADRANTS.
+// Si les coordenades són 0,0, llavors es troba al centre. Cal indicar-ho correctament a l’usuari.
 
 import java.util.Scanner
 
 fun main() {
-    val scan: Scanner = Scanner(System.`in`);
+    val SCAN = Scanner(System.`in`);
 
     // Demanem les dades.
-    var any: Int = scan.nextInt();
-    var xifres: Int = 0;
+    var coordenadaX = SCAN.nextInt();
+    var coordenadaY = SCAN.nextInt();
+    var quadrantsX: String = "";
+    var quadrantsY: String = "";
+    var quadrants: String = "";
 
-    // Convertim el numero en String i el guardem en una variable.
-    var anyCadena: String = any.toString();
-
-    // Guardem en la variable només la penultima xifra.
-    // Utilitzem ".substring" per seleccionar només la penultima xifra.
-    anyCadena = anyCadena.substring(anyCadena.length - 2, anyCadena.length - 1)
-
-    // Comprovem si la penultima xifra es 9 i imprimim el resultat
-    if (anyCadena == "9") {
-        println("SI")
-    } else {
-        println("NO")
+    //Fem les comparacions per saber en què quadrant es troba l'enemic.
+    if (coordenadaX == 0 && coordenadaY == 0) {
+        quadrants = "1,2,3,4"
+    } else if (coordenadaX == 0) {
+        quadrantsX = "1,2"
+    } else if (coordenadaX > 0) {
+        quadrantsX = "1"
+    } else if (coordenadaX < 0) {
+        quadrantsX = "2"
     }
 
-    scan.close();
+    if (coordenadaX == 0 && coordenadaY == 0) {
+        quadrants = "1,2,3,4"
+    } else if (coordenadaX == 0) {
+        quadrantsX = "1,2"
+    } else if (coordenadaX > 0) {
+        quadrantsX = "1"
+    } else if (coordenadaX < 0) {
+        quadrantsX = "2"
+    }
+
+
+    if (coordenadaX == 0) {
+        quadrantsX = "1,2"
+    } else if (coordenadaX > 0) {
+        quadrantsX = "1"
+    } else if (coordenadaX < 0) {
+        quadrantsX = "2"
+    }
+
+
+    // Imprimim el resultat.
+
 }

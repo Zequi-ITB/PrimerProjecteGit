@@ -1,28 +1,39 @@
 import java.util.Scanner
 
-// En tots els jocs a on hi ha un teclat hi ha un menú per fer varies coses, en que pots seleccionar varies opcions, i cada tecla farà una cosa diferent.
-//Demana amb Scanner una tecla i fes un switch a on cada opció representi una acció, segons aquesta taula. Torna l’opció escollida per pantalla.
+// Quan Bambino va sortir amb el seu primer ex, l'ex tenia 18 anys.
+// Bambino va dir "mai més ningú de 18 anys" El segón ex de bambino tenia 29.
+// Bambino va dir "mai més ningú de 29 anys" El tercer tenia 26. Bambino... sí, ja us ho imagineu.
+
+//Per cada cas de prova s'ha de dir SI si l'interés no té l'edat dels exs de bambino i NO en cas contrari.
 
 fun main() {
-    val scan: Scanner = Scanner(System.`in`);
+    val SCAN: Scanner = Scanner(System.`in`);
 
-    // Demanem les dades en Char i llegim només el primer caracter.
-    var eleccio: String = scan.next();
+    // Demanem les dades.
+    // Evito utilitzar la paraula "ex" per les variables, ja que em surten moltes paraules clau de kotlin que comencen amb "ex"
+    var parellaBambino1: Int = SCAN.nextInt();
+    var parellaBambino2: Int = SCAN.nextInt();
+    var parellaBambino3: Int = SCAN.nextInt();
+    var interesActual: Int = SCAN.nextInt();
+    var repeteix: Boolean = false;
 
-    // Comprovem quina opció ha triat l'usuari i imprimim el resultat.
-    when (eleccio) {
-        "Q" -> println("Skill 1");
-        "W" -> println("Skill 2");
-        "E" -> println("Skill 3");
-        "R" -> println("Ultimate");
-        "B" -> println("Recall")
-        "D" -> println("Bronzes never use summoners")
-        "F" -> println("Bronzes never use summoners")
-        else -> println("ERROR")
+    // Comparem l'edat dels ex de Bambino amb el seu últim interès
+    when (interesActual) {
+        parellaBambino1 -> repeteix = true;
+        parellaBambino2 -> repeteix = true;
+        parellaBambino3 -> repeteix = true
+        else -> repeteix = false
+    }
+
+    // Imprimim el resultat
+    if (repeteix) {
+        println("NO")
+    } else {
+        println("SI")
     }
 
 
-    scan.close()
+    SCAN.close()
 }
 
 
