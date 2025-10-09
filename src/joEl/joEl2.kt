@@ -20,7 +20,7 @@ fun main() {
     var filaStringAsc: String = "";
     var filaStringDesc: String = "";
     var filaString: String = ""
-//sdas
+//sdas´ñlñĺ
     // Fem el problema
     repeat(num) {
 
