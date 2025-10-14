@@ -1,28 +1,31 @@
 import java.util.Scanner
 
-// Isabel Preysler t’ha demanat fer una torre de Ferrero Rocher per a la recepció de l’ambaixador. La torre ha de ser en forma de piràmide quadrada.
-// Això significa que el primer pis tindrà un Ferrero, el segon 4, el tercer 9, el quart 16, i així succesivament (cada pis és un quadrat amb un més a cada cantó)
-//Per cada cas de prova caldrà respondre: El nombre de bombons necessaris per a construir la piràmide
-// (no els bombons del pis que fa de base, sinó tots els bombons que fan falta per fer la piràmide).
+// Un icónic atac de mag en el WoW es Explosión Arcana.
+// Aquest atac comença fent poc mal, pero cada cop que el fas servir fa un 100% més de mal.
+// Per exemple, si el primer cop fa 100 punts de mal, el següent farà 200, el següent 300, el següent 400, i així fins que passa un temps.
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem el numero de casos a considerar.
-    var voltes: Int = scan.nextInt();
-    var suma: Int = 0;
+    // Demanem les dades
+    var danyInicial: Int = scan.nextInt();
+    var vidaEnemic: Int = scan.nextInt();
 
-    //Fem un bucle per demanar els números i calcular el nombre de bombons.
-    repeat(voltes) {
-        var num: Int = scan.nextInt();
+    // Declarem variables necessaries per fer comptabilitzar els cops.
+    var danyIncrement: Int = 0;
+    var sumaTotalDany: Int = 0;
+    var cops: Int = 0;
 
-        // Fem una iteracio numero per numero per calcular el total de bombons.
-        for (i in 1..num) {
-            suma += i * i;
-        }
-        //Imprimim el resultat
-        println(suma)
+    // Calculem quants cops fan falta per matar a l'enemic.
+    while (sumaTotalDany < vidaEnemic) {
+        danyIncrement = danyIncrement + ((danyInicial * 100) / 100)
+        sumaTotalDany += danyIncrement;
+        cops++;
     }
+
+// Imprimim la quantitat de cops.
+    println(cops)
+
     scan.close()
 }
 
