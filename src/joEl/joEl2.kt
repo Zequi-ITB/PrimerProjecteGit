@@ -1,37 +1,29 @@
-// Imagina't que estàs organitzant una competició en què els participants han de realitzar diverses proves.
-// Cada prova dóna un cert nombre de punts a cada participant, però aquest nombre de punts pot ser variable depenent de les condicions de la competició.
-// El teu objectiu és calcular la puntuació total de cada participant a partir dels resultats obtinguts en les proves.
-//Se't dóna una llista amb les puntuacions obtingudes pels participants en diverses proves.
-// Cada participant té una puntuació per cada prova, i tu has de calcular la puntuació total per cada participant.
-// La puntuació total es calcula com la suma de les puntuacions de totes les proves en què ha participat.
-// El teu objectiu és imprimir la puntuació total de tots els participants.
-// Per exemple, si tenim 3 participants i 4 proves, el teu programa ha de sumar les puntuacions de cada participant i mostrar-les a l’usuari.
-
-//L'output ha de ser una línia per a cada participant amb la seva puntuació total.
-
 import java.util.Scanner
 
+// Un icónic atac de mag en el WoW es Explosión Arcana.
+// Aquest atac comença fent poc mal, pero cada cop que el fas servir fa un 100% més de mal.
+// Per exemple, si el primer cop fa 100 punts de mal, el següent farà 200, el següent 300, el següent 400, i així fins que passa un temps.
+
 fun main() {
-    val scan = Scanner(System.`in`);
+    val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem les dades.
-    var participants: Int = scan.nextInt();
-    var proves: Int = scan.nextInt();
-    var sumaPunts: Int = 0;
+    // Demanem les dades
+    var dany: Int = scan.nextInt();
+    var vidaEnemic: Int = scan.nextInt();
 
-    // Fem un bucle repeat per la quantitat de participant i dins un altre bucle  amb la quantitat de proves que volem sumar.
-    repeat(participants) {
-        sumaPunts = 0;
-        repeat(proves) {
-            var puntuacio: Int = scan.nextInt();
-            sumaPunts += puntuacio;
-        }
-        // Imprimim el resultat de cada participant en cada passada.
-        println(sumaPunts)
+    // Declarem variables necessaries per fer comptabilitzar els cops.
+    var cops: Int = 1;
+
+    // Calculem quants cops fan falta per matar a l'enemic.
+    while (vidaEnemic > 0) {
+        vidaEnemic -= dany*cops
+        cops++;
     }
 
-    scan.close();
-}
+// Imprimim la quantitat de cops.
+    println(cops)
 
+    scan.close()
+}
 
 
