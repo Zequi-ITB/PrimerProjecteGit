@@ -21,7 +21,7 @@ fun main() {
         var contador: Int = 0;
         var b: Boolean = false;
         var m: Boolean = false;
-
+//dsfs
         // Demanem les medicions
         while (quantitatMedicions > contador && m == false) {
             var medicions: Int = scan.nextInt();
