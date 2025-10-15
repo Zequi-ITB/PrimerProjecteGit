@@ -13,32 +13,40 @@ fun main() {
     // Demanem la quantitat de casos
     var casos: Int = scan.nextInt();
 
-    // Demanem la quantitat de cartes
+    // Demanem la quantitat de cartes dins del bucle
     repeat(casos) {
         var cartes: Int = scan.nextInt();
         var sumaCartes: Int = 0;
         var contador: Int = 1
         var cartesSobrants: Int = 0;
 
+        if (cartes >= 2) {
+            if (cartes % 2 == 0) {
+                while (sumaCartes < cartes) {
+                    sumaCartes += contador * 2 + (contador - 1);
 
-        while (sumaCartes < cartes) {
-            sumaCartes += (contador * 2) + (contador - 1);
-            contador++;
-
-            if (sumaCartes - cartes !=0) {
-
-            }
-            else
-                if (cartes>sumaCartes){
-                    cartesSobrants = sumaCartes-cartes;
+                    if (cartes - sumaCartes > 0)
+                        contador++;
+                }
+            } else {
+                while (sumaCartes < cartes) {
+                    sumaCartes += contador * 2 + (contador - 1);
+                    if (cartes < sumaCartes) {
+                        cartesSobrants = sumaCartes - cartes
+                    }
 
                 }
 
+            }
         }
-
-
         println("$contador $cartesSobrants")
 
+
+        // Fem un calcul multiplicant n*2 cada pis i sumant n-1
+
+        // Comprovem si es pot fer un pis mes i seguim al bucle o mirem si hi ha sobrants. (si es parell, vol dir que no sobraran.
+
+        // Imprimim el resultat.
 
     }
     scan.close()
