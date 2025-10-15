@@ -17,30 +17,32 @@ fun main() {
     repeat(casos) {
         var cartes: Int = scan.nextInt();
         var sumaCartes: Int = 0;
-        var contador: Int = 1
+        var contador: Int = 0
         var cartesSobrants: Int = 0;
+        var iteracioActual: Int = 0;
 
-
+        // Multipliquem n per 2 + n-1 que es la formula per calcular cada pis de la torre.
         while (sumaCartes < cartes) {
-            sumaCartes += (contador * 2) + (contador - 1);
             contador++;
+            sumaCartes += (contador * 2) + (contador - 1);
 
-            if (sumaCartes - cartes !=0) {
+            // Guardem la ultima iteracio mentre la suma sigui menor al total de cartes.
+            if (sumaCartes < cartes) {
+                iteracioActual = sumaCartes;
 
-            }
-            else
-                if (cartes>sumaCartes){
-                    cartesSobrants = sumaCartes-cartes;
-
+                // Fem el calcul de les cartes sobrants un cop la suma ha superat al total de cartes.
+            } else
+                if (sumaCartes > cartes) {
+                    cartesSobrants = cartes - iteracioActual
+                    contador--;
                 }
-
         }
 
-
+        // Imprimim el resultat
         println("$contador $cartesSobrants")
-
-
     }
+
+
     scan.close()
 }
 
