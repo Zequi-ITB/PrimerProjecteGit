@@ -1,47 +1,42 @@
 import java.util.Scanner
 
-// A Bambino li agrada jugar a cartes i l’Egipte dels faraons, ... i per això, de tant en tant, li dona per fer piràmides de cartes.
-// Les piràmides són com la de la foto.
-
-//Per cada cas de prova, caldrà respondre, en una línia amb dos valors:
-//Alçada de la piràmide de cartes que es pot aconseguir
-//Número de cartes que sobren (és a dir, les cartes que no es poden posar perquè no arriben a completar un nivell (residu).
+// Murcielago es una de les poques paraules que tenen totes les vocals. saps alguna més?
+//El programa escriurà “TOTES” si durant la frase han aparegut totes les vocals, i “FALTEN” si falta alguna vocal.
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem la quantitat de casos
-    var casos: Int = scan.nextInt();
+    // Demanem la paraula.
+    var paraula: String = scan.nextLine();
 
-    // Demanem la quantitat de cartes
-    repeat(casos) {
-        var cartes: Int = scan.nextInt();
-        var sumaCartes: Int = 0;
-        var contador: Int = 0
-        var cartesSobrants: Int = 0;
-        var iteracioActual: Int = 0;
+    var teVocalA: Boolean = false;
+    var teVocalE: Boolean = false;
+    var teVocalI: Boolean = false;
+    var teVocalO: Boolean = false;
+    var teVocalU: Boolean = false;
+    var teVocals: Boolean = false;
 
-        // Multipliquem n per 2 + n-1 que es la formula per calcular cada pis de la torre.
-        while (sumaCartes < cartes) {
-            contador++;
-            sumaCartes += (contador * 2) + (contador - 1);
-
-            // Guardem la ultima iteracio mentre la suma sigui menor al total de cartes.
-            if (sumaCartes < cartes) {
-                iteracioActual = sumaCartes;
-
-                // Fem el calcul de les cartes sobrants un cop la suma ha superat al total de cartes.
-            } else
-                if (sumaCartes > cartes) {
-                    cartesSobrants = cartes - iteracioActual
-                    contador--;
-                }
+// Fem una iteracio de cada lletra de la paraula i comprovem si estan totes les vocals.
+    for (i in 0..paraula.length - 1) {
+        when (paraula.get(i)) {
+            'a' -> teVocalA = true;
+            'e' -> teVocalE = true;
+            'i' -> teVocalI = true;
+            'o' -> teVocalO = true;
+            'u' -> teVocalU = true;
         }
 
-        // Imprimim el resultat
-        println("$contador $cartesSobrants")
+        if (teVocalA && teVocalE && teVocalI && teVocalU && teVocalO)
+            teVocals = true;
+
     }
 
+    //Imprimim  el resultat
+    if (teVocals) {
+        println("TOTES")
+    } else {
+        println("FALTEN")
+    }
 
     scan.close()
 }
