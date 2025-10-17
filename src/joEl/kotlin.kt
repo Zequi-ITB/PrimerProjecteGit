@@ -24,14 +24,16 @@ fun main() {
     // Fem un bucle amb la quantitat de casos a evaluar i demanem la secuencia de paraules i la capacitat de la telearanya.
     repeat(casos) {
 
+        //Declarem variables per comptabilitzar els lalafels i les telaranyes.
         var contadorLalafels: Int = 0;
         var contadorTelaranyes: Int = 0;
-        var hiHaAranya: Boolean = false;
         var telaranyesPlenes: Int = 0;
+
+        // Fem un bucle do-while per demanar les frases i fer diferents comprovacions
         do {
-            var paraula: String = scan.next().lowercase();
+            var paraula: String = scan.next().lowercase();   //Utilitzem lowercase per evaluar totes les entrades de igual manera.
 
-
+            // Declarem una variable per saber si la paraula te coma al final, aixi sabrem si es l'ultima quan no tingui coma.
             var teComa: Boolean = paraula.get(paraula.length - 1) == ','
 
             // Comprovem si la paraula te coma per saber si restar-li o no l'ultim caracter
@@ -39,43 +41,41 @@ fun main() {
                 paraula = paraula.dropLast(1)
             }
 
-            //// Verifiquem si apareix la paraula aranya en la secuencia per imprimim directament que hi ha 0 telaranyes plenes.
-            if (paraula != "aranya") {
+            //// Verifiquem si apareix la paraula aranya en la secuencia per resetear els comptadors a 0.
+            if (paraula == "aranya") {
+                contadorLalafels = 0;
+                contadorTelaranyes = 0;
+            }
 
-                //Comptabilitzem quants Lalafels i telaranyes hi ha.
-                when (paraula) {
-                    "lalafel" -> contadorLalafels++;
-                    "telaranya" -> contadorTelaranyes++
-                }
-
-
-                //Imprimim el resultat si apareix alguna aranya.
-            } else {
-                hiHaAranya = true;
+            //Comptabilitzem quants Lalafels i telaranyes hi ha.
+            when (paraula) {
+                "lalafel" -> contadorLalafels++;
+                "telaranya" -> contadorTelaranyes++
             }
 
 
         } while (teComa)
 
+        // Demanem le capacitat de la telaranya.
         var capacitat: Int = scan.nextInt();
         scan.nextLine();
 
-        telaranyesPlenes = contadorLalafels / capacitat
-        if (hiHaAranya) {
+        // Comprovem si la capacitat es 0, de no ser aixi, fem el calcul de quantes telaranyes hi ha plenes i imprimim el resultat.
+        if (capacitat <= 0) {
             println("Hay 0 telaranyas llenas.")
-        } else {
-            println("Hay $telaranyesPlenes telaranyas llenas.")
         }
 
-
+        // Dividim els lalafels per la capacitat per saber quantes telaranyes fan falta per tots.
+        // Si el resultat es igual o major a la quantitat de telaranyes imprimim el resultat.
+        else
+            if (contadorLalafels / capacitat >= contadorTelaranyes) {
+                telaranyesPlenes = contadorTelaranyes
+                println("Hay $telaranyesPlenes telaranyas llenas.")
+            } else {
+                telaranyesPlenes = contadorLalafels / capacitat;
+                println("Hay $telaranyesPlenes telaranyas llenas.")
+            }
     }
-
-
-    // Multipliquem la quantitat de telaranyes per la capacitat
-
-    // Mirem si la quantitat de lalafels es mes igual o menor que la quantitat de telaranyes
-
-    // Evaluem si hi caben totes en una o en mes.
 
     scan.close()
 }
