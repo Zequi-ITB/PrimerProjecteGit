@@ -22,12 +22,18 @@ fun main() {
     // Fem un bucle amb la quantitat de casos a evaluar per demanar les dades al usuari.
     repeat(casos) {
         var dies: Int = scan.nextInt();
+
+        // Fem una viarable per comptar els dies restants per el proper eclipsi total o parcial.
         var diesRestants: Int = 0;
+
+        //Comprovem si es un eclipsi total, parcial o res i imprimim el resultat.
         if (dies % diesEclipsiTotal == 0) {
             println("TOTAL " + diesRestants)
         } else if (dies % diesEclipsiParcial == 0) {
             println("PARCIAL " + diesRestants)
         } else {
+
+            //En cas de no ser ni eclipsi parcial ni total, calculem quants dies faltan per al proper eclipsi i quin tipus de eclipsi sera(total o parcial)
             if ((diesEclipsiTotal - dies % diesEclipsiTotal) < (diesEclipsiParcial - dies % diesEclipsiParcial)) {
                 diesRestants = diesEclipsiTotal - (dies % diesEclipsiTotal)
             } else {
