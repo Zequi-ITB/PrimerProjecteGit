@@ -23,10 +23,10 @@ fun main() {
     repeat(casos) {
         var dies: Int = scan.nextInt();
         var diesRestants: Int = 0;
-        if (dies % 548 == 0) {
-            println("TOTAL "+diesRestants)
-        } else if (dies % 183 == 0) {
-            println("PARCIAL "+ diesRestants)
+        if (dies % diesEclipsiTotal == 0) {
+            println("TOTAL " + diesRestants)
+        } else if (dies % diesEclipsiParcial == 0) {
+            println("PARCIAL " + diesRestants)
         } else {
             if ((diesEclipsiTotal - dies % diesEclipsiTotal) < (diesEclipsiParcial - dies % diesEclipsiParcial)) {
                 diesRestants = diesEclipsiTotal - (dies % diesEclipsiTotal)
