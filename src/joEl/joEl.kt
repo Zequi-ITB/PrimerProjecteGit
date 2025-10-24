@@ -1,37 +1,27 @@
 import java.util.Scanner
 
-// El tió és un tronc màgic que ens caga regals la nit de Nadal mentre l'apallisem a cops de bastó i cantem la cançoneta
-// "Caga tió! Tió de Nadal No caguis arengades que son salades..."
-//La cançó en qüestió ha tret protagonisme al propi tió de tal forma que se li ha començat a dir "cagatió" donant peu a que sorgeixi la polèmica.
-// I tu com li dius, "tió" o "cagatió"?
-//El nom correcte és "tió" i, si no aturem aquesta tendència, la propera generació cantarà "Caga cagatió!..."
-// i la seguent li dirà "cagacagatió" i la següent cantarà "Caga cagacagatió!...", amb la qual cosa és molt probable que es perdi la tradició perquè ningú no entendrà res.
-
-// Per a cada cas cal indicar el primer vers de la cançó que farà servir aquella generació per fer cagar el tió.
-// Per evitar problemes no farem servir tildes i escriurem "tio" en comptes de "tió".
+// Dos nens petits discuteixen per qui té l'avi o l'àvia més gran. Ajuda'ls.
+// El programa informa amb el nom de l'avi més vell. Si els dos tenen la mateixa edat dirà: "Tenen la mateixa edat".
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem la quantitat de casos a evaluar.
-    var casos: Int = scan.nextInt();
+    // Demanem els noms i els numeros, no fem servir bucles perque el exercici es de la categoria "sense bucles"
+    var nomAvi1: String = scan.nextLine();
+    var edatAvi1: Int = scan.nextInt();
+    scan.nextLine()
+    var nomAvi2: String = scan.nextLine();
+    var edatAvi2: Int = scan.nextInt();
 
-    // Fem un bucle per demanar les generacions segons la quantitat de casos.
-    repeat(casos) {
-        var generacions: Int = scan.nextInt();
-        var cagaTio: String = "Caga ";
-
-        // Fem un bucle que sumi de 2 en 2 per afegir la paraula "caga" a la string.
-        // Començem des-de el 3 perque en 1 i 2 no fa falta que afageixi res a la string.
-        for (i in 3..generacions step 2) {
-            cagaTio += "caga"
+    // Comprovem quin es l'avi mes gran i imprimim el resultat.
+    if (edatAvi1 == edatAvi2) {
+        println("Tenen la mateixa edat")
+    } else
+        if (edatAvi1 > edatAvi2) {
+            println(nomAvi1)
+        } else {
+            println(nomAvi2)
         }
-
-        // Imprimim el resultat
-        println(cagaTio + "tio!")
-    }
-
     scan.close()
 }
-
 

@@ -1,45 +1,37 @@
 import java.util.Scanner
 
-// A Bambino li agrada jugar a cartes i l’Egipte dels faraons, ... i per això, de tant en tant, li dona per fer piràmides de cartes.
-// Les piràmides són com la de la foto.
+// Sempre tens un amic pesat que et diu "Te'n recordes de...".
+// Jo no perquè soc una aplicació web, però Marc me n'ha parlat. Clar que Marc potser tampoc té amics si li parla a una aplicació web.
 
-//Per cada cas de prova, caldrà respondre, en una línia amb dos valors:
-//Alçada de la piràmide de cartes que es pot aconseguir
-//Número de cartes que sobren (és a dir, les cartes que no es poden posar perquè no arriben a completar un nivell (residu).
+//Per cada cas de prova es vol retornar el nombre que ocupava la posició P
+// en la llista de nombres. Considereu que la primera posició és 0.
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem la quantitat de casos
+    // Demanem els casos a considerar
     var casos: Int = scan.nextInt();
 
-    // Demanem la quantitat de cartes
+    // Fem un bucle amb la quantitat de casos i demanem el tamany de l'array.
     repeat(casos) {
-        var cartes: Int = scan.nextInt();
-        var sumaCartes: Int = 0;
-        var contador: Int = 1
-        var cartesSobrants: Int = 0;
+        var tamanyArray: Int = scan.nextInt();
 
+        // Declarem variables per portar el control del que te la major quantitat de vots.
+        var votsGuanyador: Int = 0;
+        var guanyador: Int = 0;
 
-        while (sumaCartes < cartes) {
-            sumaCartes += (contador * 2) + (contador - 1);
-            contador++;
+        // Creem l'array i demanem el per entrada els valors dels elements.
+        var llistatDeVots: Array<Int> = Array(tamanyArray) { scan.nextInt() }
 
-            if (sumaCartes - cartes !=0) {
-
+        // Fem un bucle per iterar entre els valors de l'array i comparem quin es el mes gran.
+        for (i in llistatDeVots.indices) {
+            if (llistatDeVots[i] > votsGuanyador) {
+                votsGuanyador = llistatDeVots[i]
+                guanyador = i + 1;
             }
-            else
-                if (cartes>sumaCartes){
-                    cartesSobrants = sumaCartes-cartes;
-
-                }
-
         }
-
-
-        println("$contador $cartesSobrants")
-
-
+        // Imprimim el resultat del guanyador.
+        println(guanyador)
     }
     scan.close()
 }
