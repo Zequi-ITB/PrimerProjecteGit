@@ -1,11 +1,11 @@
 import java.util.Scanner
 
-// Sempre tens un amic pesat que et diu "Te'n recordes de...".
-// Jo no perquè soc una aplicació web, però Marc me n'ha parlat. Clar que Marc potser tampoc té amics si li parla a una aplicació web.
+//Diu la llegenda que Euler de petit va poder sumar molt fàcilment tots els números del 0 al 100 perquè va donar-se compte que 0+100 = 100, 1+99 = 100, 2+98 = 100, etc. D’aquí neix la fórmula d’Euler
+//nota: Euler té 32109382190381290 fórmules diferents i totes es diuen fórmula d'Euler
 
-//Per cada cas de prova es vol retornar el nombre que ocupava la posició P
-// en la llista de nombres. Considereu que la primera posició és 0.
-
+//Per a cada cas, en una línia, digues la suma dels nombres oposats per grandària. És a dir, la suma del més petit amb el més gran,
+// la suma del segon més petit amb el segón més gran, la suma del tercer més petit amb el tercer més gran, etc, fins que els hagis dit tots.
+// Hauràs de dir sempre N/2 nombres
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
@@ -16,23 +16,42 @@ fun main() {
     repeat(casos) {
         var tamanyArray: Int = scan.nextInt();
 
-        // Declarem variables per portar el control del que te la major quantitat de vots.
-        var votsGuanyador: Int = 0;
-        var guanyador: Int = 0;
-
         // Creem l'array i demanem el per entrada els valors dels elements.
-        var llistatDeVots: Array<Int> = Array(tamanyArray) { scan.nextInt() }
+        var llistatDeNumeros: Array<Int> = Array(tamanyArray) { scan.nextInt() }
 
-        // Fem un bucle per iterar entre els valors de l'array i comparem quin es el mes gran.
-        for (i in llistatDeVots.indices) {
-            if (llistatDeVots[i] > votsGuanyador) {
-                votsGuanyador = llistatDeVots[i]
-                guanyador = i + 1;
+        var numeroMesGran: Int = 0
+        var numeroMesPetit: Int = 0
+        var iteradorPetit: Int = 0
+        var iteradorGran: Int = 0
+
+
+        // Comprovem els numeros
+        repeat(tamanyArray / 2) {
+            for (i in llistatDeNumeros.indices) {
+                if (llistatDeNumeros[i] > numeroMesGran) {
+                    numeroMesGran = llistatDeNumeros[i]
+                    iteradorGran = i
+
+                }
+                if (llistatDeNumeros[i] < numeroMesPetit) {
+
+                    numeroMesPetit = llistatDeNumeros[i]
+                    iteradorPetit = i
+
+                }
             }
+
+            var resultat: Int = numeroMesPetit + numeroMesGran
+            print("$resultat ")
+
+
+            // Eliminem del array el mes gran i mes petit en cada pasada.
+            llistatDeNumeros[iteradorGran] = 0
+            llistatDeNumeros[iteradorPetit] = 0
+
         }
-        // Imprimim el resultat del guanyador.
-        println(guanyador)
+        println()
+
     }
     scan.close()
 }
-

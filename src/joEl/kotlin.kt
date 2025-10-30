@@ -11,45 +11,62 @@ fun main() {
     // Demanem els casos de prova a considerar
     var casos: Int = scan.nextInt();
     val CUANTITAT_CARTES: Int = 7
+    val TOTAL_CARTES: Int = 13
 
     // Fem un bucle amb la quantitat de casos i demanem el tamany de l'array.
     repeat(casos) {
 
-        // Creem l'array i demanem els valor de les cartes.
+        // Creem els arrays i demanem els valor de les cartes.
         var llistatDeCartes: Array<Int> = Array(CUANTITAT_CARTES) { scan.nextInt() }
-        val ORDRE_CARTES: Array<Int> = arrayOf(1, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
-        var llistatBooleans: Array<Boolean> = Array(CUANTITAT_CARTES) { false }
-        var escala: Array<Int> = Array(5) { 0 }
+        var llistatBooleans: Array<Boolean> = Array(TOTAL_CARTES) { false }
 
+        // Definim unes variables per portar control sonbre si hi ha escala o no.
+        var contEscala: Int = 1;
+        var hiHaEscala: Boolean = false;
 
-        // Comprovem si es una escala, escala reial o res.
-        var cont: Int = 0;
-        while (cont <= 7) {
+        // Asignem cada carta a un boolean especific
+        for (i in llistatDeCartes.indices) {
+            when (llistatDeCartes[i]) {
+                1 -> llistatBooleans[0] = true
+                13 -> llistatBooleans[1] = true
+                12 -> llistatBooleans[2] = true
+                11 -> llistatBooleans[3] = true
+                10 -> llistatBooleans[4] = true
+                9 -> llistatBooleans[5] = true
+                8 -> llistatBooleans[6] = true
+                7 -> llistatBooleans[7] = true
+                6 -> llistatBooleans[8] = true
+                5 -> llistatBooleans[9] = true
+                4 -> llistatBooleans[10] = true
+                3 -> llistatBooleans[11] = true
+                2 -> llistatBooleans[12] = true
+            }
+        }
+        // Comprovem si hi ha escala evaluant els booleans consecutius i portan el comptador, en cas de que no es compleixi la seqüència, és resetea el comptador a 1.
+        for (i in llistatBooleans.indices) {
+            if (llistatBooleans[i]) {
+                contEscala++;
 
-            for (i in ORDRE_CARTES.indices) {
-                if (ORDRE_CARTES[i] in llistatDeCartes.indices) {
-                    escala[cont] = llistatDeCartes[i]
-                    cont++
-                } else {
-                    for (i in escala.indices) {
-                        escala[i] = 0
-                        cont = 0
-                    }
+                // Si el comptador arriba a 5, vol dir que hi ha escala llavors activem un boolean a true.
+                if (contEscala == 5) {
+                    hiHaEscala = true;
                 }
+            } else {
+                contEscala = 1;
             }
         }
 
-        if (0 in escala.indices) {
-            println("NO")
-        } else
-            if (13 in escala.indices && 1 in escala.indices)
+        // Fem les ultimas comprovacions per saber si es reial o normal i imprimim el resultat
+        if (hiHaEscala) {
+            if (llistatBooleans[0] && llistatBooleans[4]) {
                 println("ESCALA REIAL")
-            else {
+            } else {
                 println("ESCALA")
             }
+        } else {
+            println("NO")
+        }
     }
-
-
     scan.close()
 }
 
