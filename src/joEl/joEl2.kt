@@ -48,7 +48,6 @@ fun main() {
             // Eliminem del array el mes gran i mes petit en cada pasada.
             llistatDeNumeros[iteradorGran] = 0
             llistatDeNumeros[iteradorPetit] = 0
-
         }
         println()
 
