@@ -1,76 +1,73 @@
-import java.util.*
+import java.util.Scanner
 
-//Un professor vol saber per un treball quin es el nen més alt de la seva classe.
-//El programa escriurà “Nen Nº“ del nen més alt. En cas que tots superin l'altura màxima escriurà "No hi ha cap nen".
+//En el Poker Texas Hold’em, al final de la partida jugues amb 7 cartes (les dues a la teva ma i les 5 del flop). Un cop fet això es calcula quina jugada tens. Les escales i les escales Reials son de les millors jugades possibles
+//Una escala es quan tens 5 cartes consecutives dintre de les 7.
+//Una escala reial es quan tens just 10, Jack, Reina, Rei, i As
+
+//Per a cada cas hauràs de dir si tens una escala, escala reial, o no tens res
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem l'altura maxima per ser considerat nen.
-    var alturaMax: Int = scan.nextInt()
+    // Demanem els casos de prova a considerar
+    var casos: Int = scan.nextInt();
+    val CUANTITAT_CARTES: Int = 7
+    val TOTAL_CARTES: Int = 13
 
-    // Demanem les altures de les persones a considerar.
-    var altura1: Int = scan.nextInt()
-    var altura2: Int = scan.nextInt()
-    var altura3: Int = scan.nextInt()
+    // Fem un bucle amb la quantitat de casos i demanem el tamany de l'array.
+    repeat(casos) {
 
-    // Declarem variables per comprovar si s'ha superat l'altura maxima.
-    var altura1Superada: Boolean = false;
-    var altura2Superada: Boolean = false;
-    var altura3Superada: Boolean = false;
-    var dosAlturaSuperada: Boolean = false;
+        // Creem els arrays i demanem els valor de les cartes.
+        var llistatDeCartes: Array<Int> = Array(CUANTITAT_CARTES) { scan.nextInt() }
+        var llistatBooleans: Array<Boolean> = Array(TOTAL_CARTES) { false }
 
-    // Comprovem si s'ha superat l'altura maxima en una o mes d'una persona.
-    if (altura1 > alturaMax) {
-        altura1Superada = true
-    }
-    if (altura2 > alturaMax) {
-        altura2Superada = true
-        if (altura1Superada) {
-            dosAlturaSuperada = true
-        }
-    }
-    if (altura3 > alturaMax) {
-        altura3Superada = true
-        if (altura1Superada || altura2Superada) {
-            dosAlturaSuperada = true
-        }
-    }
+        // Definim unes variables per portar control sonbre si hi ha escala o no.
+        var contEscala: Int = 1;
+        var hiHaEscala: Boolean = false;
 
-    // Declarem variables per comprovar quin es el mes alt
-    var mesAlt: Int = 0
-    var guanyador: Int = 0
-
-    // Fem una condicio per si els tres superan l'altura maxima i imprimim el missatge corresponent
-    if (altura1Superada && altura2Superada && altura3Superada) {
-        println("No hi ha cap nen")
-    } else {
-        // Fem tota la serie de comprobacions en el cas de que mes de una persona superi l'altura o solo una.
-        if (dosAlturaSuperada) {
-            if (altura1Superada && altura2Superada) {
-                mesAlt = altura3
-            } else if (altura1Superada && altura3Superada) {
-                mesAlt = altura2
-            } else if (altura2Superada && altura3Superada) {
-                mesAlt = altura1
+        // Asignem cada carta a un boolean especific
+        for (i in llistatDeCartes.indices) {
+            when (llistatDeCartes[i]) {
+                1 -> llistatBooleans[0] = true
+                13 -> llistatBooleans[1] = true
+                12 -> llistatBooleans[2] = true
+                11 -> llistatBooleans[3] = true
+                10 -> llistatBooleans[4] = true
+                9 -> llistatBooleans[5] = true
+                8 -> llistatBooleans[6] = true
+                7 -> llistatBooleans[7] = true
+                6 -> llistatBooleans[8] = true
+                5 -> llistatBooleans[9] = true
+                4 -> llistatBooleans[10] = true
+                3 -> llistatBooleans[11] = true
+                2 -> llistatBooleans[12] = true
             }
-        } else if (altura1Superada) {
-            mesAlt = maxOf(altura2, altura3)
-        } else if (altura2Superada) {
-            mesAlt = maxOf(altura3, altura1)
-        } else if (altura3Superada) {
-            mesAlt = maxOf(altura1, altura2)
-        } else {
-            mesAlt = maxOf(altura1, altura2, altura3)
+        }
+        // Comprovem si hi ha escala evaluant els booleans consecutius i portan el comptador, en cas de que no es compleixi la seqüència, és resetea el comptador a 1.
+        for (i in llistatBooleans.indices) {
+            if (llistatBooleans[i]) {
+                contEscala++;
+
+                // Si el comptador arriba a 5, vol dir que hi ha escala llavors activem un boolean a true.
+                if (contEscala == 5) {
+                    hiHaEscala = true;
+                }
+            } else {
+                contEscala = 1;
+            }
         }
 
-        // Asignem el numero de posicio segons el que tingui l'altura mes gran i imprimim el resultat.
-        when (mesAlt) {
-            altura1 -> guanyador = 1
-            altura2 -> guanyador = 2
-            altura3 -> guanyador = 3
+        // Fem les ultimas comprovacions per saber si es reial o normal i imprimim el resultat
+        if (hiHaEscala) {
+            if (llistatBooleans[0] && llistatBooleans[4]) {
+                println("ESCALA REIAL")
+            } else {
+                println("ESCALA")
+            }
+        } else {
+            println("NO")
         }
-        println("Nen $guanyador")
     }
     scan.close()
-
 }
+
+
