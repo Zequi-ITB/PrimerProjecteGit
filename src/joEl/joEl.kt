@@ -1,7 +1,6 @@
 import java.util.Scanner
 
-// Dos nens petits discuteixen per qui té l'avi o l'àvia més gran. Ajuda'ls.
-// El programa informa amb el nom de l'avi més vell. Si els dos tenen la mateixa edat dirà: "Tenen la mateixa edat".
+
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
