@@ -22,41 +22,59 @@ fun main() {
     // Demanem els casos a considerar
     var casos: Int = scan.nextInt();
 
-    scan.nextLine()
 
-
-    // prodria agafar tots els elements com un string i pasarlos a un array despres
-
-
-    // Fem un bucle amb la quantitat de casos
+    // Fem un bucle amb la quantitat de casos a evaluar
     repeat(casos) {
-        var contadorElementos: Int = 0
+
+        // Demanem l'import que ha pagat Celia per la aposta.
         var importNumero: Int = scan.nextInt()
-        var cadena: String =""
-       do {
-           cadena = scan.next()
-           contadorElementos++;
 
-       }while (cadena!="0")
+        // Declarem un string per guardar els numeros que anem demanant
+        var cadenaApuestas: String = ""
+
+        // Fem un bucle per demanar numeros fins que sigui 0
+
+        do {
+            var apuestas: Int = scan.nextInt()
+
+            // Si el numero no es 0, el guardem a la cadena de Strings.
+            if (apuestas != 0) {
+                cadenaApuestas += "$apuestas "
+            }
+        } while (apuestas != 0)
 
 
+        // Creem l'array de INTS. Fem servir el .trim per eliminar els espais en blanc al final i al principi. El .split per separar els elements quan hi hagi un espai.
+        // El .map per convertir cada element a enter i el .toTypedArray per pasarlo a array.
+        if (cadenaApuestas != "") {
+            var llistatNumeros: Array<Int> = cadenaApuestas.trim().split(" ").map { it.toInt() }.toTypedArray()
 
 
-       // Creem l'array
-       var llistatNumeros = cadena.split(" ").toTypedArray().map { it.toInt() }.toTypedArray()
+            //Ordenem l'array de manera ascendent
+            llistatNumeros.sort()
 
-        for (i in llistatNumeros.indices){
-            println(llistatNumeros[i])
+            // Declarem variables per portar el compta de la suma de les apostas, de les soliituds acceptades i un iterador.
+            var sumaApuestas: Int = 0
+            var solicituds: Int = 0
+            var iterador: Int = 0
+
+            // Fem un bucle per anar sumant les apostes i comptabilitzen les solicituds que se accepten.
+            while (iterador < llistatNumeros.size) {
+                sumaApuestas += llistatNumeros[iterador]
+
+                if (sumaApuestas <= importNumero) {
+                    solicituds++;
+                }
+                iterador++;
+            }
+
+            //Imprimim el resultat.
+            println(solicituds)
+        } else {
+            println("0")
         }
-
-
-
-
-
-
-
-
-
     }
+//Final
+
     scan.close()
 }

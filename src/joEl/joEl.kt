@@ -12,6 +12,8 @@ fun main() {
     var nomAvi2: String = scan.nextLine();
     var edatAvi2: Int = scan.nextInt();
 
+
+
     // Comprovem quin es l'avi mes gran i imprimim el resultat.
     if (edatAvi1 == edatAvi2) {
         println("Tenen la mateixa edat")
