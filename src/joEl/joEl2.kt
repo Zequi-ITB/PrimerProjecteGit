@@ -40,19 +40,19 @@ fun main() {
        }while (cadena!="0")
 
 
+
+
        // Creem l'array
+       var llistatNumeros = cadena.split(" ").toTypedArray().map { it.toInt() }.toTypedArray()
 
-
-
-        var llistatDeSolicituds: arr = (contadorElementos){0}
-
-        llistatDeSolicituds = cadena.split(" ").map { it.toInt() }
-
-        for (i in llistatDeSolicituds.indices){
-
-            llistatDeSolicituds[i]= cadena[i].digitToInt()
-            println(llistatDeSolicituds[i])
+        for (i in llistatNumeros.indices){
+            println(llistatNumeros[i])
         }
+
+
+
+
+
 
 
 
