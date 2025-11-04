@@ -1,28 +1,40 @@
 import java.util.Scanner
 
+//En Marc, el vostre professor preferit, està intentant de que li digueu la paraula “acumulador” davant del vostre silenci habitual. Per això, fa un joc del penjat.
 
+//Per a cada cas de prova hauras de mostrar la paraula descoberta. Les lletres sense descobrir encara vindran marcats amb asteriscos.
+// Després de la paraula es posarà un espai i el nombre d’errors. Es considera un error quan el caràcter no està en la paraula secreta
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem els noms i els numeros, no fem servir bucles perque el exercici es de la categoria "sense bucles"
-    var nomAvi1: String = scan.nextLine();
-    var edatAvi1: Int = scan.nextInt();
+    // Demanem la quantitat de casos de prova a evaluar
+    var casos: Int = scan.nextInt()
     scan.nextLine()
-    var nomAvi2: String = scan.nextLine();
-    var edatAvi2: Int = scan.nextInt();
 
+    var lletra: String = ""
 
+    // Fem un bucle amb la quantitat de casos de prova
+    repeat(casos) {
 
-    // Comprovem quin es l'avi mes gran i imprimim el resultat.
-    if (edatAvi1 == edatAvi2) {
-        println("Tenen la mateixa edat")
-    } else
-        if (edatAvi1 > edatAvi2) {
-            println(nomAvi1)
-        } else {
-            println(nomAvi2)
+        // Demanem la paraula secreta i les lletres
+        var paraulaSecreta: String = scan.nextLine().lowercase()
+
+        lletra += scan.next()
+        lletra.split(" ")
+        for (i in lletra.indices) {
+            if (lletra[i] in paraulaSecreta) {
+
+            }
+            else{
+                paraulaSecreta.replace()
+            }
         }
+
+
+    }
+
+
     scan.close()
 }
 
