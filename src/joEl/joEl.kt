@@ -1,60 +1,72 @@
 import java.util.Scanner
 
+//Vicente vivia en un poble perdut a les muntanyes. No tenien ni aigua a casa, i l’havien de buscar a un pou,
+// a qualsevol hora del dia. La veritat és que passava moltes estones al dia caminant entre casa seva i el pou,
+// i a vegades se li feia de nit. El trajecte era avorrit, però Vicente, que era molt imaginatiu, sempre buscava algun entreteniment.
+// Un dia de lluna plena, va pensar com podria anar el pou a la lluna, encara que sigui fent volant la imaginació, i ... certament va trobar la manera.
+
+//Vicente vol saber si la seqüència de paraules de cada cas de prova compleix el següent:
+//Totes les paraules tenen la mateixa longitud
+//Dues paraules consecutives són sempre iguals tret d’una única lletra que canvia (pot ser qualsevol lletra).
+// Si es compleixen aquests dues condicions, respondrà CORRECTE Cas contrari respondrà INCORRECTE
 
 fun main() {
-    val scan: Scanner = Scanner(System.`in`);
-
-    // Demanem la quantitat de casos de prova a evaluar
+    val scan: Scanner = Scanner(System.`in`)
+    // Demanem la quantitat de casos
     var casos: Int = scan.nextInt()
-    scan.nextLine()
 
-    // Fem un bucle amb la quantitat de casos de prova
+    // Fem un bucle amb la quantitat de casos
     repeat(casos) {
 
-        // Demanem les lletres en un string, les pasem a majuscules per evaluar totes de la mateixa manera.
-        var paraula: String = scan.nextLine().uppercase()
+        // Demanem la quantitat de lineas a comparar.
+        var quantitatLineas: Int = scan.nextInt()
+        scan.nextLine()
 
-        // Creem variables per portar el control de les i, en cas de que hagi mes d'una es prendra l'ultima com la separadora final.
-        var posicioI: Int = 0
-        var inicial: String = ""
+        // Creem un array de strings i demanem les paraules.
+        var llistatParaules: Array<String> = Array(quantitatLineas) { scan.nextLine() }
 
+        //Creem una variable per comptabilitzar les lletres diferents, un altre per si detectem que alguna de les condicions no es cumpleix
+        // i un altre per comparar totes les paraules amb la longitud del primer element
+        var longitud: Int = llistatParaules[0].length
+        var esIncorrecte: Boolean = false
+        var lletresDiferents: Int = 0
 
-        //Creem un Array amb el string y fem un split amb la coma
-        var llistatDeNoms: Array<String> = paraula.trim().split(", ").toTypedArray()
-
-        // Comprovem la posicio de l'ultima lletra "i". Nomes ens interessa comprovar-ho al ultim element de l'array
-        for (lletra in llistatDeNoms[llistatDeNoms.lastIndex].indices) {
-            if (llistatDeNoms[llistatDeNoms.lastIndex].get(lletra) == 'I' || llistatDeNoms[llistatDeNoms.lastIndex].get(lletra-1) == ' ') {
-                posicioI = lletra
+        // Iterem i comparem cada element amb .lenght per veure
+        for (i in llistatParaules.indices) {
+            if (llistatParaules[i].length != longitud) {
+                esIncorrecte = true
             }
         }
 
-        // Concatenem amb substrings i reemplaçem l'ultima "i" per una coma al ultim element de l'array.
-        llistatDeNoms[llistatDeNoms.lastIndex] = llistatDeNoms[llistatDeNoms.lastIndex].substring(0, posicioI) + ',' +
-                llistatDeNoms[llistatDeNoms.lastIndex].substring(posicioI + 1)
+        // Si tenen la mateixa llargada comparem les lletres per veure si nomes canvia 1 lletra entre dos paraules consecutives
+        if (esIncorrecte == false) {
 
-        println(llistatDeNoms[llistatDeNoms.lastIndex])
+            //Fem un bucle per pasar per tots els elements del array
+            for (posicio in llistatParaules.indices) {
+                lletresDiferents = 0
 
-        // Agafem els ultims dos elements i els pasem a un nou Array, els separem per coma un altra vegada.
-        var llistat_De_SubStrings = llistatDeNoms[llistatDeNoms.lastIndex].split(", ")
-
-        //println(llistat_De_SubStrings[0])
-
-
-        // Finalment, fem l'array definitiu amb la suma dels dos arrays.
-        var llistatDeNoms_final: Array<String> = llistatDeNoms.dropLast(1).toTypedArray() + llistat_De_SubStrings.toTypedArray()
-
-
-
-        //Agafem el primer caracter de cada paraula i l'afaegim a una nova string.
-        for (i in llistatDeNoms_final.indices) {
-            println(llistatDeNoms_final[i])
-            inicial = inicial + llistatDeNoms_final[i].get(0).uppercase()
+                // Si la posicio no es la ultima, comparem dos paraules consecutives en un bucle.
+                if (posicio < llistatParaules.size - 1) {
+                    for (lletra in llistatParaules[posicio].indices) {
+                        if (llistatParaules[posicio].get(lletra) != llistatParaules[posicio + 1].get(lletra)) {
+                            lletresDiferents++
+                        }
+                    }
+                    if (lletresDiferents != 1) {
+                        esIncorrecte = true
+                    }
+                }
+            }
         }
 
         //Imprimim el resultat.
-        println(inicial)
+        if (esIncorrecte) {
+            println("INCORRECTE")
+        } else {
+            println("CORRECTE")
+        }
     }
+
 
     scan.close()
 }
