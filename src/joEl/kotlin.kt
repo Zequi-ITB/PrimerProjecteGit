@@ -1,72 +1,67 @@
 import java.util.Scanner
 
-//En el Poker Texas Hold’em, al final de la partida jugues amb 7 cartes (les dues a la teva ma i les 5 del flop). Un cop fet això es calcula quina jugada tens. Les escales i les escales Reials son de les millors jugades possibles
-//Una escala es quan tens 5 cartes consecutives dintre de les 7.
-//Una escala reial es quan tens just 10, Jack, Reina, Rei, i As
+//ABBA va ser un grup suec de música pop que es va crear a Estocolm l'any 1972, però la fama li va arribar l'any 1974
+//en guanyar el Festival de la Cançó d'Eurovisió d'aquell any amb la seva cançó Waterloo. Van aprofitar aquell moment
+// per encadenar un èxit darrere un altre fins a convertir-se en la banda amb més vendes de la dècada dels setanta.
+//El grup va destacar també pel seu atrevit vestuari, extravagant i molt colorit. El nom del grup tampoc deixava indiferent,
+// ja que estava compost per les inicials dels quatre membres del grup: Agneta, Björn, Benny i Anni-Frid.
 
-//Per a cada cas hauràs de dir si tens una escala, escala reial, o no tens res
+//Per a cada cas cal indicar la primera lletra del nom de cadascun dels membres en majúscules, sense accents.
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem els casos de prova a considerar
-    var casos: Int = scan.nextInt();
-    val CUANTITAT_CARTES: Int = 7
-    val TOTAL_CARTES: Int = 13
+    // Demanem la quantitat de casos de prova a evaluar
+    var casos: Int = scan.nextInt()
+    scan.nextLine()
 
-    // Fem un bucle amb la quantitat de casos i demanem el tamany de l'array.
+    // Fem un bucle amb la quantitat de casos de prova
     repeat(casos) {
 
-        // Creem els arrays i demanem els valor de les cartes.
-        var llistatDeCartes: Array<Int> = Array(CUANTITAT_CARTES) { scan.nextInt() }
-        var llistatBooleans: Array<Boolean> = Array(TOTAL_CARTES) { false }
+        // Demanem les lletres en un string, les pasem a majuscules per evaluar totes de la mateixa manera.
+        var paraula: String = scan.nextLine().uppercase()
 
-        // Definim unes variables per portar control sonbre si hi ha escala o no.
-        var contEscala: Int = 1;
-        var hiHaEscala: Boolean = false;
+        // Creem variables per portar el control de les i, en cas de que hagi mes d'una es prendra l'ultima com la separadora final.
+        var posicioI: Int = 0
 
-        // Asignem cada carta a un boolean especific
-        for (i in llistatDeCartes.indices) {
-            when (llistatDeCartes[i]) {
-                1 -> llistatBooleans[0] = true
-                13 -> llistatBooleans[1] = true
-                12 -> llistatBooleans[2] = true
-                11 -> llistatBooleans[3] = true
-                10 -> llistatBooleans[4] = true
-                9 -> llistatBooleans[5] = true
-                8 -> llistatBooleans[6] = true
-                7 -> llistatBooleans[7] = true
-                6 -> llistatBooleans[8] = true
-                5 -> llistatBooleans[9] = true
-                4 -> llistatBooleans[10] = true
-                3 -> llistatBooleans[11] = true
-                2 -> llistatBooleans[12] = true
-            }
-        }
-        // Comprovem si hi ha escala evaluant els booleans consecutius i portan el comptador, en cas de que no es compleixi la seqüència, és resetea el comptador a 1.
-        for (i in llistatBooleans.indices) {
-            if (llistatBooleans[i]) {
-                contEscala++;
+        //Creem un string en el que guardarem les inicials.
+        var inicial: String = ""
 
-                // Si el comptador arriba a 5, vol dir que hi ha escala llavors activem un boolean a true.
-                if (contEscala == 5) {
-                    hiHaEscala = true;
+        // Fem un bucle per reemplazar la "i" per una ",".
+        for (i in paraula.indices) {
+            if (i > 0) {
+                if (paraula.get(i) == 'I' && paraula.get(i - 1) == ' ' && paraula.get(i + 1) == ' ') {
+                    posicioI = i
                 }
-            } else {
-                contEscala = 1;
+            }
+            // Si trobem algun accent, el reemplaçem per la lletra sense accent.
+            when (paraula.get(i)) {
+                'Á' -> paraula = paraula.replace('Á', 'A')
+                'À' -> paraula = paraula.replace('À', 'A')
+                'É' -> paraula = paraula.replace('É', 'E')
+                'Í' -> paraula = paraula.replace('Í', 'I')
+                'Ó' -> paraula = paraula.replace('Ó', 'O')
+                'Ò' -> paraula = paraula.replace('Ò', 'O')
+                'Ú' -> paraula = paraula.replace('Ú', 'U')
             }
         }
 
-        // Fem les ultimas comprovacions per saber si es reial o normal i imprimim el resultat
-        if (hiHaEscala) {
-            if (llistatBooleans[0] && llistatBooleans[4]) {
-                println("ESCALA REIAL")
-            } else {
-                println("ESCALA")
-            }
-        } else {
-            println("NO")
+        // Concatenem substrings per reemplaçar la "i" per una ","
+        paraula = paraula.substring(0, posicioI) + ',' + paraula.substring(posicioI + 1)
+
+        // Creem un array i separem els elements per la ","
+        var llistatDeNoms: Array<String> = paraula.trim().split(",").toTypedArray()
+
+
+        // Fem un altre bucle per eliminar el espais en cada element amb el .trim i per guardar les inicials de cada nom.
+        for (i in llistatDeNoms.indices) {
+            llistatDeNoms[i] = llistatDeNoms[i].trim()
+            inicial += llistatDeNoms[i].get(0)
         }
+
+        //Imprimim el resultat
+        println(inicial)
     }
+
     scan.close()
 }
 

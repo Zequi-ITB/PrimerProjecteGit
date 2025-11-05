@@ -22,24 +22,27 @@ fun main() {
         //Creem un Array amb el string y fem un split amb la coma
         var llistatDeNoms: Array<String> = paraula.trim().split(", ").toTypedArray()
 
-        // Comprovem si la lletra "i" surt mes de una vegada i la comptabilitzem. Nomes ens interessa comprovar-ho al ultim element de l'array
+        // Comprovem la posicio de l'ultima lletra "i". Nomes ens interessa comprovar-ho al ultim element de l'array
         for (lletra in llistatDeNoms[llistatDeNoms.lastIndex].indices) {
-            if (llistatDeNoms[llistatDeNoms.lastIndex].get(lletra) == 'I') {
+            if (llistatDeNoms[llistatDeNoms.lastIndex].get(lletra) == 'I' || llistatDeNoms[llistatDeNoms.lastIndex].get(lletra-1) == ' ') {
                 posicioI = lletra
             }
         }
 
-        // De ser aixi, nomes separem l'ultima de ellas.
         // Concatenem amb substrings i reemplaçem l'ultima "i" per una coma al ultim element de l'array.
         llistatDeNoms[llistatDeNoms.lastIndex] = llistatDeNoms[llistatDeNoms.lastIndex].substring(0, posicioI) + ',' +
                 llistatDeNoms[llistatDeNoms.lastIndex].substring(posicioI + 1)
 
+        println(llistatDeNoms[llistatDeNoms.lastIndex])
+
         // Agafem els ultims dos elements i els pasem a un nou Array, els separem per coma un altra vegada.
         var llistat_De_SubStrings = llistatDeNoms[llistatDeNoms.lastIndex].split(", ")
 
+        //println(llistat_De_SubStrings[0])
+
+
         // Finalment, fem l'array definitiu amb la suma dels dos arrays.
         var llistatDeNoms_final: Array<String> = llistatDeNoms.dropLast(1).toTypedArray() + llistat_De_SubStrings.toTypedArray()
-
 
 
 
