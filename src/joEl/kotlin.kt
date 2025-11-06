@@ -1,12 +1,13 @@
 import java.util.Scanner
 
-//ABBA va ser un grup suec de música pop que es va crear a Estocolm l'any 1972, però la fama li va arribar l'any 1974
-//en guanyar el Festival de la Cançó d'Eurovisió d'aquell any amb la seva cançó Waterloo. Van aprofitar aquell moment
-// per encadenar un èxit darrere un altre fins a convertir-se en la banda amb més vendes de la dècada dels setanta.
-//El grup va destacar també pel seu atrevit vestuari, extravagant i molt colorit. El nom del grup tampoc deixava indiferent,
-// ja que estava compost per les inicials dels quatre membres del grup: Agneta, Björn, Benny i Anni-Frid.
+//En el joc d’Scrabble es disposa d’un taulell de 15x15 caselles on cada jugador forma
+// paraules encadenades fins que no resten fitxes per col.locar. Les paraules es formen
+// amb lletres (cada lletra en una fitxa). A cada joc hi ha un nombre determinat de lletres,
+// les més habituals estan repetides vàries vegades, però hi ha lletres que es troben una o
+// dos vegades únicament. En aquesta ocasió considerem es juga a les 26 lletres de l’alfabet
+// anglès (de l’A a la Z).
 
-//Per a cada cas cal indicar la primera lletra del nom de cadascun dels membres en majúscules, sense accents.
+
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
@@ -14,53 +15,86 @@ fun main() {
     var casos: Int = scan.nextInt()
     scan.nextLine()
 
+    var paraulaConstruida: String = ""
+    var contadorParaulasConstruides: Int = 0
+
+
     // Fem un bucle amb la quantitat de casos de prova
     repeat(casos) {
 
-        // Demanem les lletres en un string, les pasem a majuscules per evaluar totes de la mateixa manera.
-        var paraula: String = scan.nextLine().uppercase()
+        // Demanem la quantitat de lletras que tenim amb un array de enters
+        var llistatNumeros: Array<Int> = Array<Int>(26) { scan.nextInt() }
+        scan.nextLine()
 
-        // Creem variables per portar el control de les i, en cas de que hagi mes d'una es prendra l'ultima com la separadora final.
-        var posicioI: Int = 0
+        // Creem un array de chars amb tot l'abecedari per poger comparar amb les paraules i relacionarlo amb la posicio de enters que ens dira si tenim lletres o no.
+        var llistatLletres: Array<Char> = arrayOf<Char>(
+            'a',
+            'b',
+            'c',
+            'd',
+            'e',
+            'f',
+            'g',
+            'h',
+            'i',
+            'j',
+            'k',
+            'l',
+            'm',
+            'n',
+            'o',
+            'p',
+            'q',
+            'r',
+            's',
+            't',
+            'u',
+            'v',
+            'w',
+            'x',
+            'y',
+            'z'
+        )
 
-        //Creem un string en el que guardarem les inicials.
-        var inicial: String = ""
 
-        // Fem un bucle per reemplazar la "i" per una ",".
-        for (i in paraula.indices) {
-            if (i > 0) {
-                if (paraula.get(i) == 'I' && paraula.get(i - 1) == ' ' && paraula.get(i + 1) == ' ') {
-                    posicioI = i
+        var paraula: String = ""
+        paraulaConstruida = ""
+        contadorParaulasConstruides = 0
+
+        //Demanem les paraules en un bucle fins que es posi un "." i les comparem amb les lletres que tenim.
+        while (paraula != ".") {
+            paraula = scan.nextLine().lowercase()
+            var paraulaTemporal: String = ""
+
+            for (i in paraula.indices) {
+                if (paraula[i] in llistatLletres) {
+                    if (llistatNumeros[llistatLletres.indexOf(paraula[i])] > 0) {
+                        paraulaTemporal += paraula[i]
+
+                        llistatNumeros[llistatLletres.indexOf(paraula[i])] =
+                            llistatNumeros[llistatLletres.indexOf(paraula[i])] - 1
+
+
+                    }
+                }
+                if (paraulaTemporal == paraula) {
+                    contadorParaulasConstruides++
+                    paraulaConstruida += " $paraulaTemporal"
                 }
             }
-            // Si trobem algun accent, el reemplaçem per la lletra sense accent.
-            when (paraula.get(i)) {
-                'Á' -> paraula = paraula.replace('Á', 'A')
-                'À' -> paraula = paraula.replace('À', 'A')
-                'É' -> paraula = paraula.replace('É', 'E')
-                'Í' -> paraula = paraula.replace('Í', 'I')
-                'Ó' -> paraula = paraula.replace('Ó', 'O')
-                'Ò' -> paraula = paraula.replace('Ò', 'O')
-                'Ú' -> paraula = paraula.replace('Ú', 'U')
-            }
+
+
         }
 
-        // Concatenem substrings per reemplaçar la "i" per una ","
-        paraula = paraula.substring(0, posicioI) + ',' + paraula.substring(posicioI + 1)
+        paraulaConstruida = paraulaConstruida.uppercase()
 
-        // Creem un array i separem els elements per la ","
-        var llistatDeNoms: Array<String> = paraula.trim().split(",").toTypedArray()
+        println("$contadorParaulasConstruides $paraulaConstruida")
 
-
-        // Fem un altre bucle per eliminar el espais en cada element amb el .trim i per guardar les inicials de cada nom.
-        for (i in llistatDeNoms.indices) {
-            llistatDeNoms[i] = llistatDeNoms[i].trim()
-            inicial += llistatDeNoms[i].get(0)
-        }
-
-        //Imprimim el resultat
-        println(inicial)
     }
+
+
+
+
 
     scan.close()
 }
