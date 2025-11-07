@@ -13,7 +13,7 @@ fun main() {
     var tamanyLlista: Int = quantitatDimensions
 
     //Fem una llista per guardar les altres llistes a dins.
-    var llistatGeneral: MutableList<MutableList<Int>> = mutableListOf()
+    var llistatGeneral1: MutableList<MutableList<Int>> = mutableListOf()
     var llistatGeneral2: MutableList<MutableList<Int>> = mutableListOf()
     var llistatSumaGeneral: MutableList<MutableList<Int>> = mutableListOf()
 
@@ -24,24 +24,29 @@ fun main() {
     // Definim i afeigim les llistes al llistat general. Llegim els valors per teclat.
     while (contador <= quantitatDimensions) {
         var llistatDePreus: MutableList<Int> = MutableList<Int>(tamanyLlista) { scan.nextInt() }
-        llistatGeneral += mutableListOf(llistatDePreus)
+        llistatGeneral1 += mutableListOf(llistatDePreus)
         contador++
     }
-    while (contador <= quantitatDimensions) {
+    while (contador2 <= quantitatDimensions) {
         var llistatDePreus: MutableList<Int> = MutableList<Int>(tamanyLlista) { scan.nextInt() }
         llistatGeneral2 += mutableListOf(llistatDePreus)
-        contador++
+        contador2++
     }
 
-    for (i in llistatGeneral.indices){
-        for (posicio in llistatGeneral[i]){
-            var llistatSuma: MutableList<Int> = MutableList<Int>
+    // Fem un altre bucle per crear la llista amb les seves llistes a dins en las que farem la suma.
+    repeat(tamanyLlista) {
+        var llistatSuma: MutableList<Int> = MutableList<Int>(tamanyLlista) { 0 }
+        llistatSumaGeneral += mutableListOf(llistatSuma)
+    }
 
+    // Iterem per cada element de les dues matrius i sumem els dos elements i el guardem en la nova llista.
+    for (i in llistatGeneral1.indices) {
+        for (posicio in llistatGeneral1[i].indices) {
+            llistatSumaGeneral[i][posicio] = llistatGeneral1[i][posicio] + llistatGeneral2[i][posicio]
+            print("" + llistatSumaGeneral[i][posicio] + " ")
         }
-
+        println()
     }
-
-
 
     scan.close()
 }
