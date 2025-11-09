@@ -1,57 +1,49 @@
 import java.util.Scanner
 
-//Donada una matriu i la seva mida, determinarem la posició del seu maxim
-//Per cada cas haureu d’escriure la posició (fila - columna) del nombre més gran de la matriu.
-// L’haureu d’expressar com ho expressaria un humà, es a dir, amb les files i columnes començant per 1.
+//Arnau va el 16 a veure la peli de Spiderman. Això significa que es perdrà una hora de classe
+
+//s'ha de dir la classe que està immediatament a sobre de SPIDERMAN, que és la classe que es perdrà. Si SPIDERMAN
+// està a primera hora i no es perd cap classe, es dirà NO
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem els casos a considerar
-    var casos: Int = scan.nextInt();
+    // Demanem les dimensions i el tamanys de la matriu.
+    var dimensions: Int = scan.nextInt()
+    var tamany: Int = scan.nextInt()
+    scan.nextLine()
 
+    // Creem la matriu, i afeigim les llistes amb un bucle. 
+    var matriu: MutableList<MutableList<String>> = mutableListOf()
 
-    // Fem un bucle amb la quantitat de casos a evaluar
-    repeat(casos) {
+    // Demanem el contingut dels elements i els guardem a les llistas.
+    repeat(dimensions) {
+        var llistatDeClasses: MutableList<String> = MutableList<String>(tamany) { scan.next() }
+        matriu += mutableListOf(llistatDeClasses)
+    }
 
-        // Demanem la quantitat de dimensions i la mida de cada llista.
-        var dimensionsLlista: Int = scan.nextInt()
-        var tamanyLlista: Int = scan.nextInt()
+    // Definim variables per guardar la posicio on trobem "SPIDERMAN"
+    var filaSpiderman: Int = 0
+    var columnaSpiderman: Int = 0
 
-        var llistatGeneral: MutableList<MutableList<Int>> = mutableListOf()
+    // Fem una iteracio per les llistes de la matriu per trobar "spiderman" i guardem la seva posicio
+    for (i in matriu.indices) {
 
-        // Definim un contador per el bucle while
-        var contador: Int = 1
+        if ("SPIDERMAN" in matriu[i]) {
+            filaSpiderman = i
+            // Fem un indexOf per saber la columna en la que es troba.
+            columnaSpiderman = matriu[i].indexOf("SPIDERMAN")
 
-        // Definim i afeigim les llistes al llistat general. Llegim els valors per teclat.
-        while (contador <= dimensionsLlista) {
-            var llistatDenumeros: MutableList<Int> = MutableList<Int>(tamanyLlista) { scan.nextInt() }
-            llistatGeneral += mutableListOf(llistatDenumeros)
-            contador++
-        }
+            // Si Spiderman es troba a la primera hora, no es perd classe per tant imprimim "NO"
+            if (filaSpiderman == 0) {
+                println("NO")
 
-        // Definim les variables per portar el control de quin es el numero major i la seva posicio.
-        var numeroMajorTemporal: Int = 0
-        var numeroMajor: Int? = 0
-        var posicioNumeroMajor: Int = 0
-        var posicioLlistaMajor: Int = 0
-
-        // Fem un bucle per agafar la posicio del numero major de cada llista i quedarnos amb el mes gran.
-        for (i in llistatGeneral.indices) {
-            numeroMajor = llistatGeneral[i].maxOrNull()?.toInt()
-
-            //Anem fent la comprovacio en cada cas per veure si el mes gran de la llista evaluada es mes gran que el de la llista anterior.
-            if (numeroMajor != null) {
-                if (numeroMajor > numeroMajorTemporal) {
-                    posicioNumeroMajor = llistatGeneral[i].indexOf(numeroMajor)
-                    posicioLlistaMajor = i
-                    numeroMajorTemporal = numeroMajor
-                }
+                // Si no es a primera hora, restem 1 a la fila per imprimim l'element que esta just a dalt de Spiderman.
+            } else {
+                println(matriu[filaSpiderman - 1][columnaSpiderman])
             }
         }
-
-        // Imprimim el resultat.
-        println("" + (posicioLlistaMajor + 1) + " " + (posicioNumeroMajor + 1))
     }
+
     scan.close()
 }
