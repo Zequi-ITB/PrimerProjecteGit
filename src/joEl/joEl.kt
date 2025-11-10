@@ -1,52 +1,49 @@
 import java.util.Scanner
 
-//Agapito Di Sousa es un estudiant de 2n de batxillerat que acaba de començar matrius i ja l’hi han posat deures.
-//Ha de resoldre unes quantes sumes però li fa molt de pal. Fes un programa per ajudar-li a resoldre-les automàticament.
+//L’excelent programador, superb professor i millor persona Gregorio deixa el consell escolar,
+// i vol amanyar les votacions per a que no li torni a tocar. Fes un software per a ajudar a marcar vots en les eleccions al consell escolar del Institut
 
-//El programa haurà de donar la matriu resultat de la suma de la matriu A amb la matriu B.
-
+//Per cada cas s’haurà de tornar una matriu quadrada del tamany marcat, amb les vores i les dues diagonals amb X. La resta de caselles sera.
 fun main() {
     val scan: Scanner = Scanner(System.`in`)
 
-    // Demanem la quantitat de dimensions i la mida de cada llista.
-    var quantitatDimensions: Int = scan.nextInt()
-    var tamanyLlista: Int = quantitatDimensions
+    // Demanem el tamany de la matriu
+    var tamanyMatriu: Int = scan.nextInt()
+    scan.nextLine()
 
-    //Fem una llista per guardar les altres llistes a dins.
-    var llistatGeneral1: MutableList<MutableList<Int>> = mutableListOf()
-    var llistatGeneral2: MutableList<MutableList<Int>> = mutableListOf()
-    var llistatSumaGeneral: MutableList<MutableList<Int>> = mutableListOf()
+    // Definim la matriu
+    var matriu: MutableList<MutableList<String>> = mutableListOf()
 
-    // Definim un contador per el bucle while
-    var contador: Int = 1
-    var contador2: Int = 1
-
-    // Definim i afeigim les llistes al llistat general. Llegim els valors per teclat.
-    while (contador <= quantitatDimensions) {
-        var llistatDePreus: MutableList<Int> = MutableList<Int>(tamanyLlista) { scan.nextInt() }
-        llistatGeneral1 += mutableListOf(llistatDePreus)
-        contador++
-    }
-    while (contador2 <= quantitatDimensions) {
-        var llistatDePreus: MutableList<Int> = MutableList<Int>(tamanyLlista) { scan.nextInt() }
-        llistatGeneral2 += mutableListOf(llistatDePreus)
-        contador2++
+    // Definim i afeigim les llistes al llistat general.
+    repeat(tamanyMatriu) {
+        var llistat: MutableList<String> = MutableList<String>(tamanyMatriu) { "" }
+        matriu.add(llistat)
     }
 
-    // Fem un altre bucle per crear la llista amb les seves llistes a dins en las que farem la suma.
-    repeat(tamanyLlista) {
-        var llistatSuma: MutableList<Int> = MutableList<Int>(tamanyLlista) { 0 }
-        llistatSumaGeneral += mutableListOf(llistatSuma)
-    }
+    for (i in matriu.indices) {
+        for (posicio in matriu[i].indices) {
+            if (i == 0 || i == matriu.size - 1) {
+                matriu[i][posicio] = "x"
+            }
+            else{
+                if (posicio == 0) {
+                    matriu[i][posicio] = "x"
+                }
+                else {
+                    println()
+                }
+            }
 
-    // Iterem per cada element de les dues matrius i sumem els dos elements i el guardem en la nova llista.
-    for (i in llistatGeneral1.indices) {
-        for (posicio in llistatGeneral1[i].indices) {
-            llistatSumaGeneral[i][posicio] = llistatGeneral1[i][posicio] + llistatGeneral2[i][posicio]
-            print("" + llistatSumaGeneral[i][posicio] + " ")
+
+
         }
-        println()
     }
+
+    println(matriu)
+
+
+
+
 
     scan.close()
 }

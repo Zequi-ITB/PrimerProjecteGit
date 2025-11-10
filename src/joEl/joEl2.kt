@@ -1,49 +1,90 @@
 import java.util.Scanner
 
-//Arnau va el 16 a veure la peli de Spiderman. Això significa que es perdrà una hora de classe
+//El tres en raya pero con gatos.
 
-//s'ha de dir la classe que està immediatament a sobre de SPIDERMAN, que és la classe que es perdrà. Si SPIDERMAN
-// està a primera hora i no es perd cap classe, es dirà NO
+//La primera línia indica els casos de prova a considerar. Cada cas tindrà dues línies, la primera tindrà el nombre de files (F)
+// i la segona el nombre de columnes (C), seguit de una matriu F*C amb una serie de nombres que seràn 1 (gat) o 0 (res).
+// (Els gats utilitzats en una ratlla no poden utilitzar-se per formar una altre).
+//Per a cada cas hauràs de donar la quantitat de línies que es poden formar amb els gats de la matriu, en format de un nombre únic.
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`);
 
-    // Demanem les dimensions i el tamanys de la matriu.
-    var dimensions: Int = scan.nextInt()
-    var tamany: Int = scan.nextInt()
-    scan.nextLine()
+    // Demanem la quantitat de casos
+    var casos: Int = scan.nextInt();
 
-    // Creem la matriu, i afeigim les llistes amb un bucle. 
-    var matriu: MutableList<MutableList<String>> = mutableListOf()
+    // Fem un bucle amb la quantitat de casos
+    repeat(casos) {
 
-    // Demanem el contingut dels elements i els guardem a les llistas.
-    repeat(dimensions) {
-        var llistatDeClasses: MutableList<String> = MutableList<String>(tamany) { scan.next() }
-        matriu += mutableListOf(llistatDeClasses)
-    }
+        // Demanem les dimensions i el tamanys de la matriu.
+        var dimensions: Int = scan.nextInt()
+        var tamany: Int = scan.nextInt()
 
-    // Definim variables per guardar la posicio on trobem "SPIDERMAN"
-    var filaSpiderman: Int = 0
-    var columnaSpiderman: Int = 0
+        // Creem la matriu, i afeigim les llistes amb un bucle.
+        var matriu: MutableList<MutableList<Int>> = mutableListOf()
 
-    // Fem una iteracio per les llistes de la matriu per trobar "spiderman" i guardem la seva posicio
-    for (i in matriu.indices) {
+        // Demanem el contingut dels elements i els guardem a les llistas.
+        repeat(dimensions) {
+            var llistatDeGats: MutableList<Int> = MutableList<Int>(tamany) { scan.nextInt() }
+            matriu.add(llistatDeGats)
+        }
 
-        if ("SPIDERMAN" in matriu[i]) {
-            filaSpiderman = i
-            // Fem un indexOf per saber la columna en la que es troba.
-            columnaSpiderman = matriu[i].indexOf("SPIDERMAN")
 
-            // Si Spiderman es troba a la primera hora, no es perd classe per tant imprimim "NO"
-            if (filaSpiderman == 0) {
-                println("NO")
+        // Definim variables per calcular la quantitat de lineas que es podem omplir amb els gats
+        var quantitatFilas: Int = 0
+        var contadorLinea = 0
+        var contadorColumna: Int = 0
+        val LINEA: Int = 3
 
-                // Si no es a primera hora, restem 1 a la fila per imprimim l'element que esta just a dalt de Spiderman.
-            } else {
-                println(matriu[filaSpiderman - 1][columnaSpiderman])
+        // Fem una iteracio per comprovar tots els elements de la llista de la matriu en format horizontal
+        for (i in matriu.indices) {
+            contadorLinea = 0
+
+
+            // Comprovem les lineas que es forman en vertical amb els gats que queden.
+            for (i in matriu.indices) {
+                contadorColumna = 0
+                for (posicio in matriu[i].indices) {
+                    if (matriu[posicio][i] == 1) {
+                        contadorColumna++
+                        if (contadorColumna == 3) {
+                            contadorColumna = 0
+                            quantitatFilas++
+
+                            for (gat in (posicio - (LINEA - 1))..posicio) {
+                                matriu[posicio][gat] = 0
+
+                            }
+                        }
+                    } else {
+                        contadorColumna = 0
+                    }
+                }
+            }
+
+            for (posicio in matriu[i].indices) {
+
+                // Anem comprovant si es forma una linea en horizontal
+                if (matriu[i][posicio] == 1) {
+                    contadorLinea++
+
+                    if (contadorLinea == 3) {
+                        contadorLinea = 0
+                        quantitatFilas++
+
+                        // Si es forma una linea, reemplaçem tots els elements que forman la linea per 0
+
+                    }
+                } else {
+                    contadorLinea = 0
+                }
             }
         }
-    }
 
+
+        // Imprimim el resultat.
+        println(quantitatFilas)
+
+    }
     scan.close()
 }
