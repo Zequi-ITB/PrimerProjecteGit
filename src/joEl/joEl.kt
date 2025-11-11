@@ -1,43 +1,36 @@
 import java.util.Scanner
 
-//L’excelent programador, superb professor i millor persona Gregorio deixa el consell escolar,
-// i vol amanyar les votacions per a que no li torni a tocar. Fes un software per a ajudar a marcar vots en les eleccions al consell escolar del Institut
+//El Joc de la Vida és un autòmata cel·lular dissenyat pel matemàtic britànic John Horton Conway al 1970
+//És un joc de zero jugadors, el que vol dir que la seva evolució està determinada pel seu estat inicial i no necessita
+// cap entrada de dades posterior. El tauler de joc és espai bidimensional rectangular, dividit en caselles (cèl·lules).
+// Cada casella te fins a 8 caselles veïnes, les que estan al seu voltant. Les cèl·lules tenen dos estats: vives o mortes.
+// Es tracta d’anar evolucionant el tauler de joc en base a unes regles, que marcaran si les caselles estan vives o mortes.
+// L’estat d’una casella evoluciona, d’una generació per la següent, sempre en funció de l’estat inicial de la matriu. en funció d’una sèrie de regles:
+//Una casella morta amb exactament 2 ó 3 caselles veïnes, “neix” (és a dir, passa a estar viva). Altrament roman morta.
+//Una casella viva amb 2 ó 3 caselles veïnes segueix viva, altrament mor o roman morta (per soledat, o superpoblació).
 
-//Per cada cas s’haurà de tornar una matriu quadrada del tamany marcat, amb les vores i les dues diagonals amb X. La resta de caselles sera.
+//Per cada cas de prova, caldrà respondre:
+//Una línia per cada fila, amb l’estat de cada columna a la següent generació, representat de la manera ja explicada i havent aplicat les regles del “Joc de la Vida”.
+
 fun main() {
     val scan: Scanner = Scanner(System.`in`)
 
-    // Demanem el tamany de la matriu
-    var tamanyMatriu: Int = scan.nextInt()
+    //Demanem a l'usuari les dimensions i tamany de la matriu
+    var filas: Int = scan.nextInt()
+    var columnes: Int = scan.nextInt()
     scan.nextLine()
 
-    // Definim la matriu
-    var matriu: MutableList<MutableList<String>> = mutableListOf()
+    // Fem la matriu
+    var matriu: MutableList<String> = mutableListOf()
 
-    // Definim i afeigim les llistes al llistat general.
-    repeat(tamanyMatriu) {
-        var llistat: MutableList<String> = MutableList<String>(tamanyMatriu) { "" }
+    // Fem un bucle per afeigir les llistes a la matriu
+    repeat(filas) {
+        var llistat: String = scan.nextLine()
         matriu.add(llistat)
     }
-
-    for (i in matriu.indices) {
-        for (posicio in matriu[i].indices) {
-            if (i == 0 || i == matriu.size - 1) {
-                matriu[i][posicio] = "x"
-            }
-            else{
-                if (posicio == 0) {
-                    matriu[i][posicio] = "x"
-                }
-                else {
-                    println()
-                }
-            }
+    println(matriu)
 
 
-
-        }
-    }
 
     println(matriu)
 
