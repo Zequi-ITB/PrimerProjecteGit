@@ -36,28 +36,85 @@ fun main() {
     var contadorCelulas: Int = 0
 
 
-
-
+    var posicio_pot_restar: Boolean = false
     for (i in matriu.indices) {
 
         for (posicio in matriu[i].indices) {
             contadorCelulas = 0
 
-            if (i == 0 && posicio == 0) {
+            if (posicio in 1..columnes - 2) {
                 if (matriu[i][posicio + 1] == '1') {
                     contadorCelulas++
                 }
-                if (matriu[i + 1][posicio] == '1') {
+                if (matriu[i][posicio - 1] == '1') {
                     contadorCelulas++
                 }
-                if (matriu[i + 1][posicio + 1] == '1') {
-                    contadorCelulas++
+                if (i in 1..filas - 2) {
+                    if (matriu[i + 1][posicio] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i + 1][posicio + 1] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i + 1][posicio - 1] == '1') {
+                        contadorCelulas++
+
+                    }
+                    if (matriu[i - 1][posicio] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i - 1][posicio + 1] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i - 1][posicio - 1] == '1') {
+                        contadorCelulas++
+                    }
+
+                } else if (i == 0) {
+                    if (matriu[i + 1][posicio] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i + 1][posicio + 1] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i + 1][posicio - 1] == '1') {
+                        contadorCelulas++
+                    }
+                } else {
+                    if (matriu[i - 1][posicio] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i - 1][posicio + 1] == '1') {
+                        contadorCelulas++
+                    }
+                    if (matriu[i - 1][posicio - 1] == '1') {
+                        contadorCelulas++
+                    }
                 }
+
                 if (contadorCelulas >= 2) {
                     matriuNovaGeneracio[i][posicio] = '1'
                 } else {
                     matriuNovaGeneracio[i][posicio] = '0'
                 }
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+            if (posicio in 1..columnes - 1) {
+
+            }
+            if (i in 0..filas - 2 && posicio_pot_restar) {
+
             } else if (i == 0) {
                 if (matriu[i][posicio - 1] == '1') {
                     contadorCelulas++
@@ -100,8 +157,8 @@ fun main() {
                 } else {
                     matriuNovaGeneracio[i][posicio] = '0'
                 }
-            }else {
-                if (matriu )
+            } else {
+                if (matriu)
             }
 
 
