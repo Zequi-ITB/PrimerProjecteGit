@@ -1,11 +1,11 @@
 import java.util.Scanner
 
-//El tres en raya pero con gatos.
+//Francesco Virgolini, el cotxe més veloç de tutti l'Italia, ha avançat a un altre cotxe en la copa del món.
+//La primera línia indica els casos de prova a considerar Cada cas compta amb un nombre variable de línies.
+// La primera líniea té un enter, K que indica quants cotxes hi ha a la cursa, i després vindràn K
+// línies, cadascuna amb el nom d'un cotxe. Es garanteix que un dels cotxes es dira "Francesco Virgolini", i mai serà el primer.
 
-//La primera línia indica els casos de prova a considerar. Cada cas tindrà dues línies, la primera tindrà el nombre de files (F)
-// i la segona el nombre de columnes (C), seguit de una matriu F*C amb una serie de nombres que seràn 1 (gat) o 0 (res).
-// (Els gats utilitzats en una ratlla no poden utilitzar-se per formar una altre).
-//Per a cada cas hauràs de donar la quantitat de línies que es poden formar amb els gats de la matriu, en format de un nombre únic.
+//Per cada cas de prova es vol retornar la llista amb Francesco Virgolini havent adelantat una posició, en format estàndard de llista.
 
 fun main() {
     val scan: Scanner = Scanner(System.`in`)
@@ -16,68 +16,28 @@ fun main() {
     // Fem un bucle amb la quantitat de casos
     repeat(casos) {
 
-        // Demanem les dimensions i el tamanys de la matriu.
-        var dimensions: Int = scan.nextInt()
+        // Demanem el tamany de la llista
         var tamany: Int = scan.nextInt()
+        scan.nextLine()
 
-        // Creem la matriu, i afeigim les llistes amb un bucle.
-        var matriu: MutableList<MutableList<Int>> = mutableListOf()
+        // Definim la llista i llegim els valor per teclat
+        var llistatCotxes: MutableList<String> = MutableList<String>(tamany) { scan.nextLine() }
 
-        // Demanem el contingut dels elements i els guardem a les llistas.
-        repeat(dimensions) {
-            var llistatDeGats: MutableList<Int> = MutableList<Int>(tamany) { scan.nextInt() }
-            matriu.add(llistatDeGats)
-        }
+        //Declarem variables per guardar el nom del cotxe que reemplaçarem i per guardar la posicio en la que trobem a francesco
+        var cotxe_reemplazar: String = ""
+        var posicioFrancesco: Int = 0
 
-        // Definim variables per calcular la quantitat de lineas que es podem omplir amb els gats
-        var quantitatFilas: Int = 0
+        // Busquem a francesco i obtenim la seva posicio amb indexOf
+        posicioFrancesco = llistatCotxes.indexOf("Francesco Virgolini")
 
-        // Fem una iteracio per comprovar tots els elements de la llista de la matriu
-        for (i in matriu.indices) {
+        // Reemplaçem el cotxe per Francesco Virgolini i guardem al altre cotxe en la antiga posicio de Francesco.
+        cotxe_reemplazar = llistatCotxes[posicioFrancesco - 1]
+        llistatCotxes[posicioFrancesco - 1] = "Francesco Virgolini"
+        llistatCotxes[posicioFrancesco] = cotxe_reemplazar
 
-            for (posicio in matriu[i].indices) {
-
-                //Comprovem en horizontal i quan trobem un tres en ratlla eliminem els gats
-                if (posicio <= dimensions - 3) {
-                    if (matriu[i][posicio] == 1 && matriu[i][posicio + 1] == 1 && matriu[i][posicio + 2] == 1) {
-                        quantitatFilas++
-                        matriu[i][posicio] = 0
-                        matriu[i][posicio + 1] = 0
-                        matriu[i][posicio + 2] = 0
-                    }
-                }
-
-                //Comprovem en vertical
-                if (i <= dimensions - 3) {
-                    if (matriu[i][posicio] == 1 && matriu[i + 1][posicio] == 1 && matriu[i + 2][posicio] == 1) {
-                        matriu[i][posicio] = 0
-                        matriu[i + 1][posicio] = 0
-                        matriu[i + 2][posicio] = 0
-                        quantitatFilas++
-                    }
-                }
-                //Comprovem la primera diagonal
-                if (i <= dimensions - 3 && posicio <= tamany - 3) {
-                    if (matriu[i][posicio] == 1 && matriu[i + 1][posicio + 1] == 1 && matriu[i + 2][posicio + 2] == 1) {
-                        matriu[i][posicio] = 0
-                        matriu[i + 1][posicio + 1] = 0
-                        matriu[i + 2][posicio + 2] = 0
-                        quantitatFilas++
-                    }
-                }
-                //Comprovem la segona diagonal
-                if (i <= dimensions - 3 && posicio >= 2) {
-                    if (matriu[i][posicio] == 1 && matriu[i + 1][posicio - 1] == 1 && matriu[i + 2][posicio - 2] == 1) {
-                        matriu[i][posicio] = 0
-                        matriu[i + 1][posicio - 1] = 0
-                        matriu[i + 2][posicio - 2] = 0
-                        quantitatFilas++
-                    }
-                }
-            }
-        }
         // Imprimim el resultat.
-        println(quantitatFilas)
+        println(llistatCotxes)
+
     }
     scan.close()
 }
