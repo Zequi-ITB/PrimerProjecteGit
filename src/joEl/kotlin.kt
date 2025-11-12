@@ -30,23 +30,35 @@ fun main() {
     }
     println(matriu)
 
-    var matriuNova = MutableList(filas) { MutableList(columnes) { '0' } }
+    var matriuNovaGeneracio = MutableList(filas) { MutableList(columnes) { '0' } }
 
     //Declarem variables per comptabilitzar els 1 que hi ha al voltat.
     var contadorCelulas: Int = 0
 
-    // Fem una iteracio per comprovar si algun número es troba entre dos números buscats.
-    for (j in 0..columnes-1) {
-
-    }
 
 
-    for (i in 1..matriu.size-2) {
 
+    for (i in matriu.indices) {
 
-        for (posicio in 1..matriu[i].length-2) {
+        for (posicio in matriu[i].indices) {
             contadorCelulas = 0
 
+            if (i == 0 && posicio == 0) {
+                if (matriu[i][posicio + 1] == '1') {
+                    contadorCelulas++
+                }
+                if (matriu[i + 1][posicio] == '1') {
+                    contadorCelulas++
+                }
+                if (matriu[i + 1][posicio + 1] == '1') {
+                    contadorCelulas++
+                }
+                if (contadorCelulas >= 2) {
+                    matriuNovaGeneracio[i][posicio] = '1'
+                } else {
+                    matriuNovaGeneracio[i][posicio] = '0'
+                }
+            } else if (i == 0) {
                 if (matriu[i][posicio - 1] == '1') {
                     contadorCelulas++
                 }
@@ -62,25 +74,62 @@ fun main() {
                 if (matriu[i + 1][posicio - 1] == '1') {
                     contadorCelulas++
                 }
+                if (contadorCelulas >= 2) {
+                    matriuNovaGeneracio[i][posicio] = '1'
+                } else {
+                    matriuNovaGeneracio[i][posicio] = '0'
+                }
+            } else if (posicio == 0) {
+                if (matriu[i][posicio + 1] == '1') {
+                    contadorCelulas++
+                }
+                if (matriu[i + 1][posicio] == '1') {
+                    contadorCelulas++
+                }
+                if (matriu[i + 1][posicio + 1] == '1') {
+                    contadorCelulas++
+                }
                 if (matriu[i - 1][posicio] == '1') {
                     contadorCelulas++
                 }
                 if (matriu[i - 1][posicio + 1] == '1') {
                     contadorCelulas++
                 }
-                if (matriu[i - 1][posicio - 1] == '1') {
-                    contadorCelulas++
+                if (contadorCelulas >= 2) {
+                    matriuNovaGeneracio[i][posicio] = '1'
+                } else {
+                    matriuNovaGeneracio[i][posicio] = '0'
                 }
+            }else {
+                if (matriu )
+            }
+
+
+
+
+
+
+
+            if (matriu[i - 1][posicio] == '1') {
+                contadorCelulas++
+            }
+            if (matriu[i - 1][posicio + 1] == '1') {
+                contadorCelulas++
+            }
+            if (matriu[i - 1][posicio - 1] == '1') {
+                contadorCelulas++
+            }
 
             if (contadorCelulas >= 2) {
-                matriuNova[i][posicio] = '1'
+                matriuNovaGeneracio[i][posicio] = '1'
             } else {
-                matriuNova[i][posicio] = '0'
+                matriuNovaGeneracio[i][posicio] = '0'
             }
+
 
         }
 
-        print(matriuNova)
+        print(matriuNovaGeneracio)
         println()
 
     }
