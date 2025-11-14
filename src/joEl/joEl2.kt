@@ -1,37 +1,67 @@
-import java.util.Locale
+
 import java.util.Scanner
-import kotlin.math.PI
 
-//En una mesa redonda no hay ningun lugar destacado y, por lo tanto, nadie ocupa una posición de privilegio.
-//Por esta razón, el sabio rey Arturo eligió una mesa redonda para reunir a sus caballeros. De este modo,
-//los caballeros eran todos iguales, no había «líderes» y se ahorraba alguna revuelta.
-//Pero más que las revueltas, lo que realmente le daba miedo al rey Arturo eran las acaloradas argumentaciones que
-//hacían los caballeros. En más de una ocasión habían sacado la espada y la habían batido al viento de un lado a otro
-//mientras los caballeros de los lados procuraban no salir heridos.
-//Por eso, el rey Arturo te pide tu ayuda. Ha calculado el espacio necesario del perímetro de la tabla que tiene que
-//tener un caballero para él solo, incluyendo el margen de seguridad, para no hacer daño a nadie. De este modo, todos
-//los caballeros se encontrarán cómodos y podrán defender libremente sus posturas. Hace falta que le digas al rey Arturo
-//si, dada una mesa y el espacio que le hace falta a cada caballero, caben todos o no.
+//Eduardo Chillida (1924-2002) fue un escultor vasco muy peculiar. De jovencito fue portero de la Real Sociedad (1942-43),
+//pero una grave lesión le hizo abandonar la carrera deportiva. Empezó a estudiar arquitectura, pero aquello de hacer
+//edificios a sabiendas de que no caerán no le acababa de convencer. Él lo que quería era buscar los límites y la
+//arquitectura no le permitía hacerlo, así que lo probó con la escultura y aquello le permitió hacer todo tipo de experimentos sin correr riesgos.
+//Entre sus particularidades hay que destacar que evitaba el uso del ángulo recto. Lo consideraba "estirado", "aburrido"
+//y poco "dialogante" con otras formas, prefiriendo los ángulos próximos a 90° (entre 88° y 93°), que encontraba más
+//"tolerantes" y capaces de "conversar" con otras geometrías.
+//Su famosa frase "Creo que la virtud se encuentra cerca del ángulo recto, pero no en él" resume su idea de que la
+//perfección y la belleza se encuentran en la imperfección, en la proximidad a la norma, pero no en la norma misma.
+//En este problema no compartiremos su visión y, si no pasas todos los juegos de prueba, no aceptaremos tu solución.
 
-//Hay que indicar "YES" (dado que rey Arthur era inglés) si caben todos los caballeros cómodamente o "NO" en caso contrario.
+//Hay que indicar "SI" si usando estos ángulos podriamos construir un "cuadrado" imitando una escultura de Chillida y "NO" en caso contrario.
+
 
 fun main() {
-    val scan: Scanner = Scanner(System.`in`).useLocale(Locale.UK)
+    val scan: Scanner = Scanner(System.`in`)
 
-    // Declarem a PI com una constant
-    val PI = PI
+    //Declarem una variable per controlar si el quadrat es possible o no
+    var esPosible: Boolean = false
 
-    // Demanem el diametro de la taula, el espai minim de cada caballero i i la quantitat de caballeros.
-    var diametro: Double = scan.nextDouble()
-    var espai_seguretat: Double = scan.nextDouble()
-    var quantitat_caballeros: Double = scan.nextDouble()
+    //Demanem els angles del cuadrat i els guardem en un llistat
+    var llistatAngulos: List<Int> = List(3) { scan.nextInt() }
 
-    //Comprovem si hi caben calculant els metres de la circunferencia (diametro*PI) i el espai de seguretat multiplicat per els caballers.
-    //Imprimim el resultat en cada cas.
-    if (diametro* kotlin.math.PI >= espai_seguretat*quantitat_caballeros ) {
-        println("YES")
+    //Fem un altre llistat per portar control dels que son valids
+    var llistatAngulosFinal: MutableList<Int> = mutableListOf()
+
+    //Declarem variables per calcular el quart angle
+    var sumaAngulos: Int = 0
+    var calcul_cuarto_angulo: Int = 0
+    val SUPERFICIE_CUADRADO: Int = 360
+
+    //Comprovem si es a dins del rang i cumpleix les altres condicions per afegir-lo a la nova llista
+    for (i in llistatAngulos) {
+        if (i in 88..93) {
+            if (i != 90) {
+                llistatAngulosFinal.add(i)
+            }
+        }
     }
-    else {
+
+    //Comprovem si la nova llista te els 3 angles valids.
+    if (llistatAngulosFinal.size == 3) {
+        for (i in llistatAngulosFinal) {
+            sumaAngulos += i
+        }
+    }
+
+    //Calculem el quart angle.
+    calcul_cuarto_angulo = SUPERFICIE_CUADRADO - sumaAngulos
+
+    //Comprovem si el quart angle es valid
+    if (calcul_cuarto_angulo in 88..93) {
+        if (calcul_cuarto_angulo != 90) {
+            esPosible = true;
+        }
+    }
+
+    //Imprimim el resultat.
+    if (esPosible) {
+        println("SI")
+    } else {
         println("NO")
     }
 
