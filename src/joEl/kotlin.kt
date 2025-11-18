@@ -58,7 +58,7 @@ fun main() {
     //Imprimim el resultat
     println(
         llistatOrdreDescParcial[posicio1 - 1].nomAlumne + " " + llistatOrdreDescParcial[posicio1 - 1].notaPrimerParcial + " " + llistatOrdreDescParcial[posicio1 - 1].notaSegonParcial + "  ${
-            "%2f".format(
+            "%.2f".format(
                 llistatOrdreDescParcial[posicio1 - 1].notaFinal
             )
         }"
